@@ -1,7 +1,7 @@
 // Soft particles that belong to the photo rather than sitting on top of it.
 //   Night: faint warm-cream specks of starlight that twinkle slowly in the sky.
 //   Day:   pale-gold dust / grass seed drifting sideways like wind over the grassland.
-// Sparse and nearly invisible at rest; they brighten, drift away from the cursor and
+// Clearly visible but quiet at rest; they brighten, drift away from the cursor and
 // ease back slowly. They fade out around the text, and the effect is off on touch
 // devices and for people who ask for reduced motion.
 (() => {
@@ -14,7 +14,7 @@
 
   const MODES = {
     dark: { rgb: "255,244,226", top: 0, bottom: 0.6 },    // warm cream, sky only
-    light: { rgb: "242,222,170", top: 0.2, bottom: 0.95 }, // pale gold, over sky and grass
+    light: { rgb: "255,247,226", top: 0.2, bottom: 0.95 }, // sunlit pale gold, bright enough to read on the pale sky
   };
   const R = 170;          // cursor reach
   const PAD = 36, FADE = 70; // clear zone around text, then fade back in
@@ -30,7 +30,7 @@
     const g = s.getContext("2d");
     const grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
     grad.addColorStop(0, `rgba(${rgb},1)`);
-    grad.addColorStop(0.35, `rgba(${rgb},.75)`);
+    grad.addColorStop(0.7, `rgba(${rgb},1)`);
     grad.addColorStop(1, `rgba(${rgb},0)`);
     g.fillStyle = grad; g.fillRect(0, 0, 32, 32);
     return s;
@@ -61,13 +61,13 @@
     mode = root.dataset.theme === "dark" ? "dark" : "light";
     const m = MODES[mode];
     sprite = makeSprite(m.rgb);
-    const n = Math.max(40, Math.min(80, Math.round((W * H) / 20000)));
+    const n = Math.max(110, Math.min(220, Math.round((W * H) / 7000)));
     particles = Array.from({ length: n }, () => {
       const hx = rand(0, W), hy = rand(m.top, m.bottom) * H;
       return {
         hx, hy, x: hx, y: hy, vx: 0, vy: 0,
-        size: rand(1, 3),                 // diameter in px
-        a: rand(0.1, 0.3),                // resting opacity
+        size: rand(1.4, 3.2),             // diameter in px
+        a: rand(0.4, 0.75),               // resting opacity
         tw: rand(0.6, 1.4), ph: rand(0, 6.28),
         wind: rand(0.12, 0.32),           // day only: sideways drift
       };
@@ -95,9 +95,9 @@
       p.x += p.vx; p.y += p.vy;
 
       const twinkle = mode === "dark" ? 0.65 + 0.35 * Math.sin(t * 0.0006 * p.tw + p.ph) : 1;
-      const alpha = Math.min(0.85, p.a * twinkle + near * 0.55) * textFade(p.x, p.y);
+      const alpha = Math.min(1, p.a * twinkle + near * 0.6) * textFade(p.x, p.y);
       if (alpha < 0.01) continue;
-      const s = p.size * 2.2; // sprite is mostly soft edge; core ≈ p.size
+      const s = p.size * 1.25; // solid dot with just a soft rim, no halo
       ctx.globalAlpha = alpha;
       ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s);
     }
