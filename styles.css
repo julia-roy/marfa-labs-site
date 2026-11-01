@@ -67,8 +67,8 @@ a { color: inherit; }
 }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
 /* Nudges: title slightly up, slogan and line up onto the sky, email line down. */
-.giant { position: relative; top: -6vh; }
-.kicker, .sub { position: relative; top: -8vh; }
+.giant { position: relative; top: -13vh; }
+.kicker, .sub { position: relative; top: -15vh; }
 .join, .note { position: relative; top: 4vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; text-transform: uppercase; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: 15px; }
