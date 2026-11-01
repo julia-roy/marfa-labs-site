@@ -66,7 +66,7 @@
       const hx = rand(0, W), hy = rand(m.top, m.bottom) * H;
       return {
         hx, hy, x: hx, y: hy, vx: 0, vy: 0,
-        size: rand(1.4, 3.2),             // diameter in px
+        size: rand(1, 3),                 // diameter in px
         a: rand(0.4, 0.75),               // resting opacity
         tw: rand(0.6, 1.4), ph: rand(0, 6.28),
         wind: rand(0.12, 0.32),           // day only: sideways drift
