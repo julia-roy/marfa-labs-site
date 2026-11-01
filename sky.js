@@ -1,111 +1,116 @@
-// Star particles that drift on a slow current and scatter away from the cursor,
-// springing back once it passes. They live in the sky above the photo's horizon.
+// Soft particles that belong to the photo rather than sitting on top of it.
+//   Night: faint warm-cream specks of starlight that twinkle slowly in the sky.
+//   Day:   pale-gold dust / grass seed drifting sideways like wind over the grassland.
+// Sparse and nearly invisible at rest; they brighten, drift away from the cursor and
+// ease back slowly. They fade out around the text, and the effect is off on touch
+// devices and for people who ask for reduced motion.
 (() => {
   const canvas = document.getElementById("sky");
   const ctx = canvas.getContext("2d");
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const root = document.documentElement;
+  const off = matchMedia("(prefers-reduced-motion: reduce)").matches
+    || !matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (off) return;
 
-  const PALETTE = {
-    light: { stars: ["255,252,246", "255,236,214", "236,232,255"], glow: 0, alpha: 0.85 },
-    dark: { stars: ["251,244,234", "255,214,168", "201,190,255"], glow: 0, alpha: 1 },
+  const MODES = {
+    dark: { rgb: "255,244,226", top: 0, bottom: 0.6 },    // warm cream, sky only
+    light: { rgb: "242,222,170", top: 0.2, bottom: 0.95 }, // pale gold, over sky and grass
   };
+  const R = 170;          // cursor reach
+  const PAD = 36, FADE = 70; // clear zone around text, then fade back in
 
-  const SKY = 0.62; // stars stay above the horizon line
-  let W, H, stars = [];
-  const pointer = { x: -9999, y: -9999, vx: 0, vy: 0, active: false };
+  let W, H, mode, particles = [], textRects = [], sprite;
+  const pointer = { x: -9999, y: -9999 };
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  // One soft dot, pre-rendered and tinted for the current mode.
+  function makeSprite(rgb) {
+    const s = document.createElement("canvas");
+    s.width = s.height = 32;
+    const g = s.getContext("2d");
+    const grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+    grad.addColorStop(0, `rgba(${rgb},1)`);
+    grad.addColorStop(0.35, `rgba(${rgb},.75)`);
+    grad.addColorStop(1, `rgba(${rgb},0)`);
+    g.fillStyle = grad; g.fillRect(0, 0, 32, 32);
+    return s;
+  }
+
+  function measureText() {
+    textRects = [".giant span", ".kicker", ".sub", ".join"]
+      .map((sel) => document.querySelector(sel)?.getBoundingClientRect())
+      .filter(Boolean);
+  }
+
+  // 0 inside the padded text box, rising to 1 over FADE px.
+  function textFade(x, y) {
+    let f = 1;
+    for (const r of textRects) {
+      const dx = Math.max(r.left - PAD - x, 0, x - r.right - PAD);
+      const dy = Math.max(r.top - PAD - y, 0, y - r.bottom - PAD);
+      f = Math.min(f, Math.min(1, Math.hypot(dx, dy) / FADE));
+    }
+    return f;
+  }
 
   function build() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     W = innerWidth; H = innerHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(240, Math.round((W * H) / 6000));
-    stars = Array.from({ length: n }, () => {
-      const hx = Math.random() * W, hy = Math.random() * H * SKY;
-      const big = Math.random() < 0.18;
+    mode = root.dataset.theme === "dark" ? "dark" : "light";
+    const m = MODES[mode];
+    sprite = makeSprite(m.rgb);
+    const n = Math.max(40, Math.min(80, Math.round((W * H) / 20000)));
+    particles = Array.from({ length: n }, () => {
+      const hx = rand(0, W), hy = rand(m.top, m.bottom) * H;
       return {
         hx, hy, x: hx, y: hy, vx: 0, vy: 0,
-        r: big ? 3.2 + Math.random() * 4 : 0.6 + Math.random() * 1.2,
-        big, hue: Math.random() < 0.55 ? 0 : Math.random() < 0.5 ? 1 : 2,
-        a: 0.35 + Math.random() * 0.6, tw: 0.5 + Math.random() * 1.5, ph: Math.random() * 6.28,
-        spin: (Math.random() - 0.5) * 0.4,
+        size: rand(1, 3),                 // diameter in px
+        a: rand(0.1, 0.3),                // resting opacity
+        tw: rand(0.6, 1.4), ph: rand(0, 6.28),
+        wind: rand(0.12, 0.32),           // day only: sideways drift
       };
     });
-  }
-
-  // Compact four-point star with curved sides, like the logo.
-  function sparkle(x, y, r, rot) {
-    const v = r * 0.78, k = r * 0.16;
-    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
-    ctx.beginPath();
-    ctx.moveTo(r, 0);
-    ctx.quadraticCurveTo(k, k, 0, v);
-    ctx.quadraticCurveTo(-k, k, -r, 0);
-    ctx.quadraticCurveTo(-k, -k, 0, -v);
-    ctx.quadraticCurveTo(k, -k, r, 0);
-    ctx.fill(); ctx.restore();
+    measureText();
   }
 
   function frame(t) {
-    const pal = PALETTE[root.dataset.theme === "dark" ? "dark" : "light"];
     ctx.clearRect(0, 0, W, H);
-
-    // Stars.
-    const R = 130;
-    for (const s of stars) {
-      if (!still) {
-        // Slow current so the sky never sits still.
-        const a = Math.sin(s.hy * 0.004 + t * 0.00008) + Math.cos(s.hx * 0.003 - t * 0.00006);
-        s.hx += Math.cos(a) * 0.12; s.hy += Math.sin(a) * 0.06;
-        if (s.hx < -20) s.hx += W + 40; else if (s.hx > W + 20) s.hx -= W + 40;
-        if (s.hy < -20) s.hy += H * SKY; else if (s.hy > H * SKY + 20) s.hy -= H * SKY;
-        if (Math.abs(s.x - s.hx) > W / 2) s.x = s.hx; // wrapped: jump with it
-
-        // Spring home, scatter from the cursor, with a little swirl.
-        s.vx += (s.hx - s.x) * 0.012; s.vy += (s.hy - s.y) * 0.012;
-        const dx = s.x - pointer.x, dy = s.y - pointer.y, d = Math.hypot(dx, dy);
-        if (d < R && d > 0.01) {
-          const f = (1 - d / R) ** 2 * 3.2;
-          s.vx += (dx / d) * f - (dy / d) * f * 0.35 + pointer.vx * 0.04 * (1 - d / R);
-          s.vy += (dy / d) * f + (dx / d) * f * 0.35 + pointer.vy * 0.04 * (1 - d / R);
-        }
-        s.vx *= 0.9; s.vy *= 0.9;
-        s.x += s.vx; s.y += s.vy;
+    const m = MODES[mode];
+    for (const p of particles) {
+      if (mode === "light") {
+        // Wind over the grassland: slow sideways drift with a gentle lift and fall.
+        p.hx += p.wind;
+        p.hy += Math.sin(t * 0.0004 + p.ph) * 0.08;
+        if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; p.hy = rand(m.top, m.bottom) * H; p.y = p.hy; }
       }
 
-      const tw = 0.55 + 0.45 * Math.sin(t * 0.0012 * s.tw + s.ph);
-      const speed = Math.min(1, Math.hypot(s.vx, s.vy) / 4);
-      const alpha = Math.min(1, (s.a * tw + speed * 0.5) * pal.alpha);
-      const rgb = pal.stars[s.hue];
-      if (s.big) {
-        if (pal.glow) {
-          const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3.4);
-          g.addColorStop(0, `rgba(${rgb},${alpha * 0.28})`);
-          g.addColorStop(1, `rgba(${rgb},0)`);
-          ctx.fillStyle = g;
-          ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 3.4, 0, 6.283); ctx.fill();
-        }
-        ctx.fillStyle = `rgba(${rgb},${alpha})`;
-        sparkle(s.x, s.y, s.r * (1 + speed * 0.4), s.spin * t * 0.001 + s.ph);
-      } else {
-        ctx.fillStyle = `rgba(${rgb},${alpha})`;
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
-      }
+      // Gentle: drift away from the cursor, ease back slowly.
+      const dx = p.x - pointer.x, dy = p.y - pointer.y, d = Math.hypot(dx, dy);
+      const near = d < R ? (1 - d / R) ** 2 : 0;
+      if (near > 0 && d > 0.01) { p.vx += (dx / d) * near * 0.35; p.vy += (dy / d) * near * 0.35; }
+      p.vx += (p.hx - p.x) * 0.004; p.vy += (p.hy - p.y) * 0.004;
+      p.vx *= 0.94; p.vy *= 0.94;
+      p.x += p.vx; p.y += p.vy;
+
+      const twinkle = mode === "dark" ? 0.65 + 0.35 * Math.sin(t * 0.0006 * p.tw + p.ph) : 1;
+      const alpha = Math.min(0.85, p.a * twinkle + near * 0.55) * textFade(p.x, p.y);
+      if (alpha < 0.01) continue;
+      const s = p.size * 2.2; // sprite is mostly soft edge; core ≈ p.size
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s);
     }
-
-    pointer.vx *= 0.85; pointer.vy *= 0.85;
-    if (!still) requestAnimationFrame(frame);
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
   }
 
-  addEventListener("pointermove", (e) => {
-    if (pointer.active) { pointer.vx = e.clientX - pointer.x; pointer.vy = e.clientY - pointer.y; }
-    pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = true;
-  }, { passive: true });
-  document.addEventListener("pointerleave", () => { pointer.active = false; pointer.x = pointer.y = -9999; });
-  addEventListener("pointerup", (e) => { if (e.pointerType === "touch") { pointer.active = false; pointer.x = pointer.y = -9999; } });
-  addEventListener("resize", () => { build(); if (still) frame(0); });
-  document.getElementById("theme")?.addEventListener("click", () => { if (still) requestAnimationFrame(frame); });
+  addEventListener("pointermove", (e) => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+  document.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
+  addEventListener("resize", build);
+  document.fonts?.ready.then(measureText);
+  // Rebuild with the other mode's particles when the theme switches.
+  new MutationObserver(build).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 
   build();
   requestAnimationFrame(frame);
