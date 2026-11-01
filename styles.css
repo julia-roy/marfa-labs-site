@@ -70,7 +70,7 @@ a { color: inherit; }
 .giant { position: relative; top: -13vh; }
 .kicker, .sub { position: relative; top: -15vh; }
 .join, .note { position: relative; top: 4vh; }
-.kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; text-transform: uppercase; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
+.kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: 15px; }
 .join { display: flex; width: min(320px, 82vw); border-bottom: 1px solid var(--line); transition: border-color .3s; }
 .join:focus-within { border-color: var(--white); }
