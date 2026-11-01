@@ -61,7 +61,7 @@
     mode = root.dataset.theme === "dark" ? "dark" : "light";
     const m = MODES[mode];
     sprite = makeSprite(m.rgb);
-    const n = Math.max(110, Math.min(220, Math.round((W * H) / 7000)));
+    const n = Math.max(180, Math.min(360, Math.round((W * H) / 4200)));
     particles = Array.from({ length: n }, () => {
       const hx = rand(0, W), hy = rand(m.top, m.bottom) * H;
       return {
@@ -89,8 +89,8 @@
       // Gentle: drift away from the cursor, ease back slowly.
       const dx = p.x - pointer.x, dy = p.y - pointer.y, d = Math.hypot(dx, dy);
       const near = d < R ? (1 - d / R) ** 2 : 0;
-      if (near > 0 && d > 0.01) { p.vx += (dx / d) * near * 0.35; p.vy += (dy / d) * near * 0.35; }
-      p.vx += (p.hx - p.x) * 0.004; p.vy += (p.hy - p.y) * 0.004;
+      if (near > 0 && d > 0.01) { p.vx += (dx / d) * near * 0.55; p.vy += (dy / d) * near * 0.55; }
+      p.vx += (p.hx - p.x) * 0.006; p.vy += (p.hy - p.y) * 0.006;
       p.vx *= 0.94; p.vy *= 0.94;
       p.x += p.vx; p.y += p.vy;
 
