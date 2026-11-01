@@ -61,7 +61,7 @@ a { color: inherit; }
 .menu:hover .dropdown a:nth-child(2), .menu:focus-within .dropdown a:nth-child(2) { transition-delay: .06s; }
 .menu:hover .dropdown a:nth-child(3), .menu:focus-within .dropdown a:nth-child(3) { transition-delay: .12s; }
 .brand { justify-self: center; display: block; }
-.brand svg { display: block; width: 74px; height: 42px; fill: var(--white); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
+.brand svg { display: block; width: 116px; height: 30px; fill: var(--white); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
 .brand:hover svg { transform: rotate(180deg); }
 .right { justify-self: end; }
 .theme {
@@ -109,7 +109,7 @@ a { color: inherit; }
   .nav { gap: 10px; }
   .left { gap: 12px; }
   .left a { font-size: 11px; }
-  .brand svg { width: 50px; height: 30px; }
+  .brand svg { width: 64px; height: 16px; }
   .giant span { transform: scale(.87, 1.305); }
   .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
