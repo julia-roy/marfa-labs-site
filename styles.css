@@ -68,7 +68,7 @@ a { color: inherit; }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
 /* Two groups: title + slogan low in the sky; agent line + email together in the grass. */
 .giant { position: relative; top: -9vh; }
-.kicker { position: relative; top: -11vh; }
+.kicker { position: relative; top: -11vh; transform: scale(1.15); } /* slightly bigger without moving the lines below */
 .sub { position: relative; top: 4.5vh; }
 .join, .note { position: relative; top: 4vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
