@@ -4,215 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Marfa Labs</title>
-<meta name="description" content="Marfa Labs builds writing agents that don't sound like AI. Diversity-preserving models, agentic loops, and an inspiration layer for long-form, email, marketing, and social.">
-<meta property="og:title" content="Marfa Labs: writing that doesn't sound like a machine">
-<meta property="og:description" content="Writing agents built to escape the sameness of LLM prose.">
-<meta name="theme-color" content="#05060b">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2305060b'/><path d='M8 23 L16 9 L24 23' fill='none' stroke='%23f3dcae' stroke-width='2.6' stroke-linejoin='round'/><circle cx='16' cy='27' r='1.6' fill='%23f3dcae'/></svg>">
+<meta name="description" content="Marfa Labs builds a writing agent that doesn't sound like AI.">
+<meta property="og:title" content="Marfa Labs">
+<meta property="og:description" content="Writing that doesn't sound like a machine.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23140604'/><path d='M8 23 L16 9 L24 23' fill='none' stroke='%23e8823a' stroke-width='2.6' stroke-linejoin='round'/></svg>">
+<script>
+  // Apply the saved or system theme before paint, so there's no flash.
+  (() => {
+    let t = null;
+    try { t = localStorage.getItem("marfa-theme"); } catch {}
+    if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<canvas id="sky" aria-hidden="true"></canvas>
+<canvas id="motes" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
 <header class="nav">
-  <a class="brand" href="#top" aria-label="Marfa Labs">
-    <span class="wordmark">M<span class="a"></span>RF<span class="a"></span> L<span class="a"></span>BS</span>
-  </a>
-  <nav>
-    <a href="#problem">Problem</a>
-    <a href="#method">Method</a>
-    <a href="#suites">Suites</a>
-    <a href="#demo">Demo</a>
-    <a class="btn btn-sm" href="#waitlist">Join waitlist</a>
-  </nav>
+  <a class="wordmark" href="/" aria-label="Marfa Labs">M<span class="a"></span>RF<span class="a"></span> L<span class="a"></span>BS</a>
+  <button class="theme" id="theme" type="button" aria-label="Switch to light mode">
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
+  </button>
 </header>
 
-<main id="top">
-
-<section class="hero">
-  <div class="hero-inner">
-    <p class="eyebrow">Writing agents · Private beta 2027</p>
-    <h1>Writing that doesn't<br><span class="glow">sound like a machine.</span></h1>
-    <p class="lede">Every model has learned to write the same safe, polished, forgettable sentence. Marfa is a writing agent built to get out of that rut: models tuned to keep their range, agentic loops that draft wide before they narrow, and an inspiration layer that starts from <em>your</em> ideas, not the model's defaults.</p>
-    <div class="cta">
-      <a class="btn" href="#demo">Try the demo</a>
-      <a class="btn btn-ghost" href="#method">How it works</a>
-    </div>
+<main class="stage">
+  <div class="bloom" aria-hidden="true">
+    <div class="halo"></div>
+    <svg id="flower" viewBox="-260 -260 520 520"></svg>
   </div>
 
-  <svg class="contours" viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="line" x1="0" x2="1">
-        <stop offset="0" stop-color="#f3dcae" stop-opacity="0"/>
-        <stop offset=".5" stop-color="#f3dcae" stop-opacity=".55"/>
-        <stop offset="1" stop-color="#9fb4ff" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#0b0b16"/>
-        <stop offset="1" stop-color="#05060b"/>
-      </linearGradient>
-    </defs>
-    <path class="c c1" d="M0 220 C 240 170, 420 250, 720 200 S 1200 150, 1440 210"/>
-    <path class="c c2" d="M0 250 C 260 210, 480 280, 760 235 S 1180 190, 1440 245"/>
-    <path class="c c3" d="M0 280 C 300 250, 520 300, 800 268 S 1160 232, 1440 276"/>
-    <path class="mesa" d="M0 318 C 60 316, 110 314, 140 306 L 168 296 L 300 296 L 326 308 C 420 316, 560 314, 660 312 C 760 310, 840 312, 900 308 L 930 290 L 1030 290 L 1056 306 C 1160 316, 1320 318, 1440 316 L1440 360 L0 360 Z"/>
-  </svg>
-</section>
-
-<section id="problem" class="wrap">
-  <div class="two">
-    <div>
-      <p class="eyebrow">The problem</p>
-      <h2>Mode collapse,<br>in plain English.</h2>
-    </div>
-    <div class="prose">
-      <p>Ask ten people for a story about a lighthouse and you get ten stories. Ask a fine-tuned model ten times and you get the same story wearing different hats. Post-training rewards the single most acceptable answer, and the range of plausible answers quietly collapses.</p>
-      <p>You've read the result: "delve," "tapestry," "it's not just X, it's Y," three adjectives in a row, an em dash every other line. Readers spot it in a sentence, and they stop trusting what comes after it.</p>
-      <ul class="tells">
-        <li>In today's fast-paced world…</li>
-        <li>Let's dive in.</li>
-        <li>It's not just a tool, it's a movement.</li>
-        <li>Seamless, intuitive, and powerful.</li>
-        <li>I hope this email finds you well.</li>
-      </ul>
-    </div>
+  <div class="copy">
+    <h1>Writing that doesn't<br>sound like a machine.</h1>
+    <p class="sub">A writing agent with range. Private beta, 2027.</p>
+    <form class="join" id="join">
+      <input type="email" name="email" required placeholder="Email" aria-label="Email">
+      <button type="submit">Join</button>
+    </form>
+    <p class="note" id="note"></p>
   </div>
-</section>
-
-<section id="method" class="wrap">
-  <p class="eyebrow">The method</p>
-  <h2>Five layers between a blank page and a generic one.</h2>
-  <p class="sub">Each layer comes from published research on preserving output diversity. We stack them, so no single fix has to carry the whole load.</p>
-
-  <ol class="layers">
-    <li>
-      <span class="num">01</span>
-      <div>
-        <h3>Annotation-anchored pre-training</h3>
-        <p>Training text is paired with labels for topic, setting, and people. Fine-tuning isn't allowed to change how the model picks those labels, so it chooses a direction first and writes around it. Reported: about 6× less diversity collapse on story writing.</p>
-        <p class="cite">Springer et al., 2026</p>
-      </div>
-    </li>
-    <li>
-      <span class="num">02</span>
-      <div>
-        <h3>Range-preserving fine-tuning</h3>
-        <p>GEM changes the fine-tuning objective so that learning the reference answer doesn't squeeze out the other plausible ones. Outputs get more varied at roughly the same quality.</p>
-        <p class="cite">Li et al., 2025</p>
-      </div>
-    </li>
-    <li>
-      <span class="num">03</span>
-      <div>
-        <h3>Preference tuning that rewards the unusual</h3>
-        <p>ReDiPO trains on pairs of good answers and marks the more unusual one as better. In the paper it was the only method where safety also improved slightly.</p>
-        <p class="cite">Samuel et al., 2026</p>
-      </div>
-    </li>
-    <li>
-      <span class="num">04</span>
-      <div>
-        <h3>Verbalized sampling at generation time</h3>
-        <p>Instead of asking for one answer, the agent asks for several, each with the probability the model assigns it, then deliberately draws from the tails. Reported: 1.6–2.1× more diverse creative writing with no loss in accuracy or safety.</p>
-        <p class="cite">Zhang et al., 2025</p>
-      </div>
-    </li>
-    <li>
-      <span class="num">05</span>
-      <div>
-        <h3>Human-first timing</h3>
-        <p>The agent doesn't write your first line. Marfa starts by asking for your raw thoughts and comes in later for structure and editing, so the direction is yours and the polish is shared.</p>
-        <p class="cite">Marfa Labs practice</p>
-      </div>
-    </li>
-  </ol>
-</section>
-
-<section class="wrap">
-  <p class="eyebrow">Architecture</p>
-  <h2>An inspiration layer, not an autocomplete.</h2>
-  <div class="arch">
-    <svg class="arch-line" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 20 C 120 0, 200 40, 333 20 S 540 0, 666 20 S 880 40, 1000 20"/>
-    </svg>
-    <div class="node"><i></i><b>You</b><span>notes, voice memos, half-ideas</span></div>
-    <div class="node"><i></i><b>Inspiration graph</b><span>angles, references, tensions mapped as nodes</span></div>
-    <div class="node"><i></i><b>Agent loop</b><span>draft wide, critique, de-slop, narrow</span></div>
-    <div class="node"><i></i><b>Voice memory</b><span>your past writing, what you kept, what you cut</span></div>
-  </div>
-  <p class="sub">Today the loop runs on Claude Opus. The roadmap swaps in our own writing model, fine-tuned with layers 01–03, while the agent, graph, and memory stay the same.</p>
-</section>
-
-<section id="suites" class="wrap">
-  <p class="eyebrow">Suites</p>
-  <h2>One engine, tuned per format.</h2>
-  <div class="grid">
-    <article class="card"><h3>Long-form</h3><p>Essays, newsletters, chapters. Outline from your notes, draft in your cadence, edit without flattening.</p></article>
-    <article class="card"><h3>Email</h3><p>Cold outreach and follow-ups that read like a person wrote them on purpose. No “I hope this finds you well.”</p></article>
-    <article class="card"><h3>Marketing</h3><p>Launch copy, landing pages, campaigns. Many distinct angles before one gets chosen.</p></article>
-    <article class="card"><h3>Threads</h3><p>Multi-post arguments with an actual through-line instead of ten numbered platitudes.</p></article>
-    <article class="card"><h3>Social</h3><p>Short posts across platforms, varied in shape and hook rather than one template on repeat.</p></article>
-    <article class="card"><h3>Creative</h3><p>Fiction and scripts, where range matters most and verbalized sampling earns its keep.</p></article>
-  </div>
-</section>
-
-<section id="demo" class="wrap">
-  <p class="eyebrow">Demo</p>
-  <h2>Paste something.<br>See the tells.</h2>
-  <p class="sub">The detector runs in your browser. The Marfa rewrite agent, which returns several takes from most to least typical, opens with the private beta.</p>
-
-  <div class="demo">
-    <div class="demo-controls">
-      <label>Format
-        <select id="format">
-          <option value="email">Email</option>
-          <option value="marketing">Marketing</option>
-          <option value="social">Social post</option>
-          <option value="thread">Thread</option>
-          <option value="longform">Long-form</option>
-        </select>
-      </label>
-      <button class="btn btn-ghost btn-sm" id="sample" type="button">Load a sloppy sample</button>
-    </div>
-    <textarea id="input" rows="8" placeholder="Paste a draft, or write your rough idea in your own words…"></textarea>
-    <div class="demo-actions">
-      <button class="btn" id="scan" type="button">Scan for tells</button>
-      <button class="btn btn-ghost" id="rewrite" type="button" disabled title="Opens with the private beta">Rewrite with Marfa · soon</button>
-    </div>
-
-    <div id="report" class="report" hidden>
-      <div class="score"><span id="scoreNum">0</span><small>machine-tell score</small></div>
-      <div id="highlighted" class="highlighted"></div>
-      <ul id="findings" class="findings"></ul>
-    </div>
-
-    <div id="takes" class="takes" hidden></div>
-  </div>
-</section>
-
-<section id="waitlist" class="wrap center">
-  <p class="eyebrow">Early access</p>
-  <h2>Write with us.</h2>
-  <p class="sub">We're onboarding writers, marketers, and small teams for the private beta.</p>
-  <form class="waitlist" id="waitlistForm">
-    <input type="email" name="email" required placeholder="you@domain.com" aria-label="Email">
-    <button class="btn" type="submit">Join waitlist</button>
-  </form>
-  <p class="note" id="waitlistNote"></p>
-</section>
-
 </main>
 
 <footer class="foot">
   <span>© 2026 Marfa Labs</span>
-  <span>Research notes by <a href="https://substack.com/@juliahq" target="_blank" rel="noopener">Julia</a></span>
+  <a href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research ↗</a>
 </footer>
 
-<script src="sky.js"></script>
+<script src="flower.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
