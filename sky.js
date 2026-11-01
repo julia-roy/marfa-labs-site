@@ -1,5 +1,5 @@
 // Star particles that drift on a slow current and scatter away from the cursor,
-// springing back once it passes, plus flowing horizon lines that rise toward it.
+// springing back once it passes. They live in the sky above the photo's horizon.
 (() => {
   const canvas = document.getElementById("sky");
   const ctx = canvas.getContext("2d");
@@ -7,10 +7,11 @@
   const root = document.documentElement;
 
   const PALETTE = {
-    light: { stars: ["26,23,38", "110,92,214", "226,128,82"], line: ["150,128,230", "240,150,110"], glow: 0 },
-    dark: { stars: ["251,244,234", "255,214,168", "201,190,255"], line: ["190,175,255", "255,180,140"], glow: 1 },
+    light: { stars: ["255,252,246", "255,236,214", "236,232,255"], glow: 1, alpha: 0.85 },
+    dark: { stars: ["251,244,234", "255,214,168", "201,190,255"], glow: 1, alpha: 1 },
   };
 
+  const SKY = 0.62; // stars stay above the horizon line
   let W, H, stars = [];
   const pointer = { x: -9999, y: -9999, vx: 0, vy: 0, active: false };
 
@@ -19,9 +20,9 @@
     W = innerWidth; H = innerHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(320, Math.round((W * H) / 4200));
+    const n = Math.min(240, Math.round((W * H) / 6000));
     stars = Array.from({ length: n }, () => {
-      const hx = Math.random() * W, hy = Math.random() * H * 0.82;
+      const hx = Math.random() * W, hy = Math.random() * H * SKY;
       const big = Math.random() < 0.18;
       return {
         hx, hy, x: hx, y: hy, vx: 0, vy: 0,
@@ -50,32 +51,6 @@
     const pal = PALETTE[root.dataset.theme === "dark" ? "dark" : "light"];
     ctx.clearRect(0, 0, W, H);
 
-    // Flowing horizon: lines that bend up toward the cursor.
-    const grad = ctx.createLinearGradient(0, 0, W, 0);
-    grad.addColorStop(0, `rgba(${pal.line[0]},0)`);
-    grad.addColorStop(0.3, `rgba(${pal.line[0]},.8)`);
-    grad.addColorStop(0.6, `rgba(${pal.line[1]},.85)`);
-    grad.addColorStop(1, `rgba(${pal.line[1]},0)`);
-    ctx.strokeStyle = grad;
-    for (let i = 0; i < 6; i++) {
-      ctx.globalAlpha = 0.9 - i * 0.13;
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      const base = H * (0.8 + i * 0.032);
-      for (let x = 0; x <= W + 10; x += 10) {
-        let y = base
-          + Math.sin(x * 0.0035 + t * 0.00035 + i * 0.9) * (10 + i * 2)
-          + Math.sin(x * 0.0012 - t * 0.00021 + i * 2.1) * 18;
-        if (pointer.active) {
-          const dx = (x - pointer.x) / 160, near = Math.max(0, 1 - Math.abs(pointer.y - base) / 260);
-          y -= 46 * Math.exp(-dx * dx) * near;
-        }
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    }
-    ctx.globalAlpha = 1;
-
     // Stars.
     const R = 130;
     for (const s of stars) {
@@ -84,7 +59,7 @@
         const a = Math.sin(s.hy * 0.004 + t * 0.00008) + Math.cos(s.hx * 0.003 - t * 0.00006);
         s.hx += Math.cos(a) * 0.12; s.hy += Math.sin(a) * 0.06;
         if (s.hx < -20) s.hx += W + 40; else if (s.hx > W + 20) s.hx -= W + 40;
-        if (s.hy < -20) s.hy += H * 0.82; else if (s.hy > H * 0.85) s.hy -= H * 0.82;
+        if (s.hy < -20) s.hy += H * SKY; else if (s.hy > H * SKY + 20) s.hy -= H * SKY;
         if (Math.abs(s.x - s.hx) > W / 2) s.x = s.hx; // wrapped: jump with it
 
         // Spring home, scatter from the cursor, with a little swirl.
@@ -101,7 +76,7 @@
 
       const tw = 0.55 + 0.45 * Math.sin(t * 0.0012 * s.tw + s.ph);
       const speed = Math.min(1, Math.hypot(s.vx, s.vy) / 4);
-      const alpha = Math.min(1, s.a * tw + speed * 0.5);
+      const alpha = Math.min(1, (s.a * tw + speed * 0.5) * pal.alpha);
       const rgb = pal.stars[s.hue];
       if (s.big) {
         if (pal.glow) {

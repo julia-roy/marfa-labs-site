@@ -7,6 +7,7 @@
 <meta name="description" content="Marfa Labs builds a writing agent that doesn't sound like AI.">
 <meta property="og:title" content="Marfa Labs">
 <meta property="og:description" content="Writing that doesn't sound like a machine.">
+<meta property="og:image" content="https://marfa-labs.com/img/marfa-day.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'><rect x='-12' y='-12' width='24' height='24' rx='6' fill='%23161427'/><path d='M9 0 Q1.2 0.9 1.9 1.9 Q0.9 1.2 0 7.2 Q-0.9 1.2 -1.9 1.9 Q-1.2 0.9 -9 0 Q-1.2 -0.9 -1.9 -1.9 Q-0.9 -1.2 0 -7.2 Q0.9 -1.2 1.9 -1.9 Q1.2 -0.9 9 0Z' fill='%23fbf4ea'/></svg>">
 <script>
   // Apply the saved theme (light by default) before paint, so there's no flash.
@@ -17,22 +18,28 @@
     document.documentElement.dataset.theme = t;
   })();
 </script>
+<link rel="preload" as="image" href="img/marfa-day.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
+<div class="photo day" aria-hidden="true"></div>
+<div class="photo night" aria-hidden="true"></div>
+<div class="shade" aria-hidden="true"></div>
 <canvas id="sky" aria-hidden="true"></canvas>
 
 <header class="nav">
-  <a class="brand" href="/" aria-label="Marfa Labs">
-    <svg class="star" viewBox="-10 -10 20 20" aria-hidden="true"><path d="M9.5 0 Q1.3 1 2 2 Q1 1.3 0 7.4 Q-1 1.3 -2 2 Q-1.3 1 -9.5 0 Q-1.3 -1 -2 -2 Q-1 -1.3 0 -7.4 Q1 -1.3 2 -2 Q1.3 -1 9.5 0Z"/></svg>
-    <span class="wordmark">M<span class="a"></span>RF<span class="a"></span> L<span class="a"></span>BS</span>
+  <nav class="left">
+    <a href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research</a>
+    <a href="#email">Beta</a>
+  </nav>
+  <a class="brand" href="/" aria-label="Marfa Labs home">
+    <svg viewBox="-16 -9 32 18" aria-hidden="true"><path d="M15 0 Q2 1 2.4 2.2 Q1 1.4 0 7.6 Q-1 1.4 -2.4 2.2 Q-2 1 -15 0 Q-2 -1 -2.4 -2.2 Q-1 -1.4 0 -7.6 Q1 -1.4 2.4 -2.2 Q2 -1 15 0Z"/></svg>
   </a>
-  <div class="actions">
-    <a class="link" href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research ↗</a>
+  <div class="right">
     <button class="theme" id="theme" type="button" aria-label="Switch to dark mode">
       <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
       <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
@@ -41,21 +48,25 @@
 </header>
 
 <main class="hero">
-  <p class="eyebrow">[ Private beta · 2027 ]</p>
-  <h1>Writing that doesn't<br>sound like a machine.</h1>
-  <p class="sub">A writing agent with range, built on research into why language models all sound the same.</p>
-  <form class="join" id="join">
-    <input type="email" name="email" required placeholder="Your email" aria-label="Email">
-    <button type="submit">Join the beta <span aria-hidden="true">→</span></button>
-  </form>
-  <p class="note" id="note" aria-live="polite"></p>
+  <h1 class="giant" aria-label="Marfa Labs"><span>MARFA</span></h1>
+  <div class="below">
+    <p class="kicker">Writing that doesn't sound like a machine</p>
+    <p class="sub">A writing agent with range. Private beta, 2027.</p>
+    <form class="join" id="join">
+      <input id="email" type="email" name="email" required placeholder="Your email" aria-label="Email">
+      <button type="submit">Join</button>
+    </form>
+    <p class="note" id="note" aria-live="polite"></p>
+  </div>
 </main>
 
 <footer class="foot">
   <span>© 2026 Marfa Labs</span>
+  <span class="credit day">Photo: Charlie Fair / Unsplash</span>
+  <span class="credit night">Photo: Alex Moliski / Unsplash</span>
 </footer>
 
-<script src="sky.js"></script>
-<script src="app.js"></script>
+<script src="sky.js?v=7"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
