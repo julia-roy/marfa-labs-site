@@ -50,7 +50,7 @@
     mesas.moveTo(0, HORIZON);
     const tops = [[0.02, 0.17, 0.028], [0.3, 0.42, 0.04], [0.64, 0.73, 0.022], [0.81, 0.98, 0.034]];
     for (const [a, b, h] of tops) {
-      const y = HORIZON - H * h, slope = H * h * 1.6;
+      const y = HORIZON - H * h, slope = Math.min(H * h * 1.6, (b - a) * W * 0.35); // keep slopes inside the mesa on narrow screens
       mesas.lineTo(W * a, HORIZON);
       mesas.quadraticCurveTo(W * a + slope * 0.5, y + H * h * 0.15, W * a + slope, y);
       mesas.lineTo(W * b - slope, y);

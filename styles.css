@@ -56,10 +56,10 @@ a { color: inherit; }
 .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
 .giant { margin: 4vh 0 0; line-height: 1; font-weight: 400; }
 .giant span {
-  display: inline-block; font: 400 clamp(96px, 19vw, 300px)/0.8 var(--serif); letter-spacing: -.01em;
+  display: inline-block; font: 400 clamp(60px, 10vw, 160px)/0.8 var(--serif); letter-spacing: -.01em;
   transform: scaleY(1.42); transform-origin: center; text-shadow: 0 0 60px var(--glow);
 }
-.below { margin-top: 15vh; display: flex; flex-direction: column; align-items: center; }
+.below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
 .kicker { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--serif); letter-spacing: .03em; text-transform: uppercase; margin: 0; text-shadow: 0 0 24px var(--glow); }
 .sub { margin: 12px 0 22px; color: var(--fg-2); font-size: 15px; }
 .join { display: flex; width: min(320px, 82vw); border-bottom: 1px solid var(--line); transition: border-color .3s; }
@@ -79,7 +79,7 @@ a { color: inherit; }
   .left a { font-size: 14px; }
   .brand svg { width: 50px; height: 30px; }
   .giant span { transform: scaleY(1.5); }
-  .below { margin-top: 11vh; }
+  .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
