@@ -7,8 +7,8 @@
   const root = document.documentElement;
 
   const PALETTE = {
-    light: { stars: ["255,252,246", "255,236,214", "236,232,255"], glow: 1, alpha: 0.85 },
-    dark: { stars: ["251,244,234", "255,214,168", "201,190,255"], glow: 1, alpha: 1 },
+    light: { stars: ["255,252,246", "255,236,214", "236,232,255"], glow: 0, alpha: 0.85 },
+    dark: { stars: ["251,244,234", "255,214,168", "201,190,255"], glow: 0, alpha: 1 },
   };
 
   const SKY = 0.62; // stars stay above the horizon line

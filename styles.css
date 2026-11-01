@@ -43,7 +43,7 @@ a { color: inherit; }
 .left a { font: 400 16px/1 var(--serif); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s, text-shadow .3s; }
 .left a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* halo */
 .brand { justify-self: center; display: block; }
-.brand svg { display: block; width: 74px; height: 42px; fill: var(--white); filter: drop-shadow(0 0 10px rgba(255, 236, 210, .5)); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
+.brand svg { display: block; width: 74px; height: 42px; fill: var(--white); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
 .brand:hover svg { transform: rotate(180deg); }
 .right { justify-self: end; }
 .theme {
