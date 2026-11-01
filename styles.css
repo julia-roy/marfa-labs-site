@@ -45,18 +45,21 @@ a { color: inherit; }
 /* Solutions dropdown: opens on hover or keyboard focus. */
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
 .dropdown {
-  position: absolute; top: 100%; left: -14px; padding-top: 14px; /* padding bridges the hover gap */
-  display: flex; flex-direction: column; min-width: 190px;
-  opacity: 0; visibility: hidden; transform: translateY(-4px);
-  transition: opacity .25s, transform .25s, visibility .25s;
+  position: absolute; top: 100%; left: 0; padding-top: 16px; /* padding bridges the hover gap */
+  display: flex; flex-direction: column; min-width: 180px;
+  visibility: hidden; transition: visibility 0s linear .5s;
 }
-.dropdown::before {
-  content: ""; position: absolute; inset: 14px 0 0; border-radius: 10px;
-  background: rgba(24, 20, 16, .28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 246, 230, .18);
+.dropdown a {
+  position: relative; font-size: 13px; padding: 12px 0; white-space: nowrap;
+  opacity: 0; transform: translateY(-6px);
+  transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), text-shadow .3s;
 }
-.dropdown a { position: relative; font-size: 13px; padding: 11px 14px; white-space: nowrap; }
-.menu:hover .dropdown, .menu:focus-within .dropdown { opacity: 1; visibility: visible; transform: none; }
+.dropdown a + a { border-top: 1px solid rgba(255, 246, 230, .35); } /* thin lines between items */
+.menu:hover .dropdown, .menu:focus-within .dropdown { visibility: visible; transition-delay: 0s; }
+.menu:hover .dropdown a, .menu:focus-within .dropdown a { opacity: 1; transform: none; }
+/* Items ease in one after another. */
+.menu:hover .dropdown a:nth-child(2), .menu:focus-within .dropdown a:nth-child(2) { transition-delay: .06s; }
+.menu:hover .dropdown a:nth-child(3), .menu:focus-within .dropdown a:nth-child(3) { transition-delay: .12s; }
 .brand { justify-self: center; display: block; }
 .brand svg { display: block; width: 74px; height: 42px; fill: var(--white); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
 .brand:hover svg { transform: rotate(180deg); }
@@ -83,7 +86,7 @@ a { color: inherit; }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
 /* Two groups: title + slogan low in the sky; agent line + email together in the grass. */
 .giant { position: relative; top: -9vh; }
-.kicker { position: relative; top: -11vh; transform: scale(1.15); } /* slightly bigger without moving the lines below */
+.kicker { position: relative; top: -13vh; transform: scale(1.15); } /* slightly bigger without moving the lines below */
 .sub { position: relative; top: 4.5vh; }
 .join, .note { position: relative; top: 4vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
