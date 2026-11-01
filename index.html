@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=31">
+<link rel="stylesheet" href="styles.css?v=33">
 </head>
 <body>
 
@@ -34,7 +34,14 @@
 <header class="nav">
   <nav class="left">
     <a href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research</a>
-    <a href="#email">Solutions</a>
+    <div class="menu">
+      <a href="#email" aria-haspopup="true">Solutions</a>
+      <div class="dropdown">
+        <a href="#email">Sales</a>
+        <a href="#email">Marketing</a>
+        <a href="#email">Creative writing</a>
+      </div>
+    </div>
   </nav>
   <a class="brand" href="/" aria-label="Marfa Labs home">
     <svg viewBox="-16 -9 32 18" aria-hidden="true"><path d="M15 0 Q2 1 2.4 2.2 Q1 1.4 0 7.6 Q-1 1.4 -2.4 2.2 Q-2 1 -15 0 Q-2 -1 -2.4 -2.2 Q-1 -1.4 0 -7.6 Q1 -1.4 2.4 -2.2 Q2 -1 15 0Z"/></svg>
@@ -66,7 +73,7 @@
   <span class="credit night">Photo: Alex Moliski / Unsplash</span>
 </footer>
 
-<script src="sky.js?v=31"></script>
-<script src="app.js?v=31"></script>
+<script src="sky.js?v=33"></script>
+<script src="app.js?v=33"></script>
 </body>
 </html>
