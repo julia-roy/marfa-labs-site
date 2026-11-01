@@ -7,7 +7,7 @@
 <meta name="description" content="Marfa Labs builds a writing agent that doesn't sound like AI.">
 <meta property="og:title" content="Marfa Labs">
 <meta property="og:description" content="Writing that doesn't sound like a machine.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23f6f3ee'/><path d='M8 23 L16 9 L24 23' fill='none' stroke='%23f2765c' stroke-width='2.8' stroke-linejoin='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'><rect x='-12' y='-12' width='24' height='24' rx='6' fill='%23161427'/><path d='M9 0 Q1.2 0.9 1.9 1.9 Q0.9 1.2 0 7.2 Q-0.9 1.2 -1.9 1.9 Q-1.2 0.9 -9 0 Q-1.2 -0.9 -1.9 -1.9 Q-0.9 -1.2 0 -7.2 Q0.9 -1.2 1.9 -1.9 Q1.2 -0.9 9 0Z' fill='%23fbf4ea'/></svg>">
 <script>
   // Apply the saved or system theme before paint, so there's no flash.
   (() => {
@@ -19,67 +19,44 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="panel">
-  <canvas id="glow" aria-hidden="true"></canvas>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-  <header class="bar">
-    <a class="wordmark" href="/" aria-label="Marfa Labs">M<span class="a"></span>RF<span class="a"></span> L<span class="a"></span>BS</a>
-
-    <nav class="pill" aria-label="Suites">
-      <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span>Long-form</span><span>Email</span><span>Marketing</span><span>Social</span>
-    </nav>
-
-    <div class="actions">
-      <button class="theme" id="theme" type="button" aria-label="Switch to dark mode">
-        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
-        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
-      </button>
-      <a class="cta" href="#email"><span aria-hidden="true">✦</span> Join waitlist</a>
-    </div>
-  </header>
-
-  <section class="intro">
-    <h1>Writing that doesn't sound like a machine.</h1>
-    <p>A writing agent with range, built on research into why language models all sound the same.</p>
-    <form class="join" id="join">
-      <input id="email" type="email" name="email" required placeholder="Your email" aria-label="Email">
-      <button type="submit">Join →</button>
-    </form>
-    <p class="note" id="note" aria-live="polite"></p>
-  </section>
-
-  <div class="meta">
-    <span>[ Writing agents ]</span>
-    <span class="clock"><span id="clockIcon" aria-hidden="true">☀</span> <span id="clock">--:--</span> Marfa, TX</span>
-    <span class="right">[ Private beta 2027 ]</span>
+<header class="nav">
+  <a class="brand" href="/" aria-label="Marfa Labs">
+    <svg class="star" viewBox="-10 -10 20 20" aria-hidden="true"><path d="M9.5 0 Q1.3 1 2 2 Q1 1.3 0 7.4 Q-1 1.3 -2 2 Q-1.3 1 -9.5 0 Q-1.3 -1 -2 -2 Q-1 -1.3 0 -7.4 Q1 -1.3 2 -2 Q1.3 -1 9.5 0Z"/></svg>
+    <span class="wordmark">M<span class="a"></span>RF<span class="a"></span> L<span class="a"></span>BS</span>
+  </a>
+  <div class="actions">
+    <a class="link" href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research ↗</a>
+    <button class="theme" id="theme" type="button" aria-label="Switch to dark mode">
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
+    </button>
   </div>
+</header>
 
-  <svg class="giant" id="giant" role="img" aria-label="Marfa">
-    <defs>
-      <radialGradient id="wordGlow" gradientUnits="userSpaceOnUse" cx="400" cy="300" r="420">
-        <stop offset="0" class="g0"/>
-        <stop offset=".28" class="g1"/>
-        <stop offset=".55" class="g2"/>
-        <stop offset="1" class="g3"/>
-      </radialGradient>
-    </defs>
-    <text id="giantText" x="0" y="0">M<tspan class="ghost">A</tspan>RF<tspan class="ghost">A</tspan></text>
-    <g id="giantA"></g>
-  </svg>
-</div>
+<main class="hero">
+  <p class="eyebrow">[ Private beta · 2027 ]</p>
+  <h1>Writing that doesn't<br>sound like a machine.</h1>
+  <p class="sub">A writing agent with range, built on research into why language models all sound the same.</p>
+  <form class="join" id="join">
+    <input type="email" name="email" required placeholder="Your email" aria-label="Email">
+    <button type="submit">Join the beta <span aria-hidden="true">→</span></button>
+  </form>
+  <p class="note" id="note" aria-live="polite"></p>
+</main>
 
 <footer class="foot">
   <span>© 2026 Marfa Labs</span>
-  <a href="https://substack.com/@juliahq" target="_blank" rel="noopener">Research ↗</a>
+  <span><span id="clockIcon" aria-hidden="true">☾</span> <span id="clock">--:--</span> · Marfa, TX</span>
 </footer>
 
-<script src="glow.js"></script>
+<script src="sky.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
