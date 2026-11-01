@@ -62,7 +62,7 @@ a { color: inherit; }
 .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
 .giant { margin: 4vh 0 0; line-height: 1; font-weight: 400; }
 .giant span {
-  display: inline-block; font: 400 clamp(60px, 10vw, 160px)/0.8 var(--serif); letter-spacing: -.01em;
+  display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em;
   transform: scaleY(1.42); transform-origin: center; text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
 }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
