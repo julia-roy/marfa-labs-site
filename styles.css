@@ -1,36 +1,30 @@
-/* Full-bleed Marfa photograph (day in light mode, night in dark mode),
-   a tall flared wordmark, and quiet white type on top. */
+/* Day: ink on a bright desert sky. Night: pale type on the Milky Way. The sky itself is drawn in sky.js. */
 :root {
-  --white: #fbf7f0;
-  --white-2: rgba(251, 247, 240, 0.78);
-  --line: rgba(251, 247, 240, 0.45);
+  --fg: #1b1610;
+  --fg-2: rgba(27, 22, 16, 0.72);
+  --line: rgba(27, 22, 16, 0.35);
+  --glow: rgba(255, 255, 255, 0.35);
   --serif: "Marcellus", "Optima", Georgia, serif;
   --sans: "Inter", system-ui, sans-serif;
   color-scheme: light;
 }
-:root[data-theme="dark"] { color-scheme: dark; }
+:root[data-theme="dark"] {
+  --fg: #f6f2ea;
+  --fg-2: rgba(246, 242, 234, 0.72);
+  --line: rgba(246, 242, 234, 0.4);
+  --glow: rgba(255, 236, 210, 0.45);
+  color-scheme: dark;
+}
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0; min-height: 100svh; display: flex; flex-direction: column; overflow-x: hidden;
-  background: #2b2a26; color: var(--white);
+  background: #7fb6e6; color: var(--fg); transition: color 1s ease;
   font: 400 15px/1.5 var(--sans); -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
 
-.photo { position: fixed; inset: 0; background-size: cover; transition: opacity 1.2s ease; }
-.photo.day { background-image: url("img/marfa-day.jpg"); background-position: center 55%; }
-.photo.night { background-image: url("img/marfa-night.jpg"); background-position: center 78%; opacity: 0; }
-[data-theme="dark"] .photo.day { opacity: 0; }
-[data-theme="dark"] .photo.night { opacity: 1; }
-/* Darken the top and bottom just enough for white type to read. */
-.shade {
-  position: fixed; inset: 0;
-  background:
-    linear-gradient(180deg, rgba(20, 16, 12, .38) 0%, rgba(20, 16, 12, 0) 22%, rgba(20, 16, 12, 0) 55%, rgba(20, 16, 12, .45) 100%),
-    rgba(30, 24, 16, .12);
-}
 #sky { position: fixed; inset: 0; width: 100%; height: 100%; }
 .nav, .hero, .foot { position: relative; z-index: 2; }
 /* Let the cursor reach the star canvas everywhere except real controls. */
@@ -43,43 +37,40 @@ a { color: inherit; }
 .left a { font: 400 21px/1 var(--serif); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s; }
 .left a:hover { opacity: .7; }
 .brand { justify-self: center; display: block; }
-.brand svg { display: block; width: 74px; height: 42px; fill: var(--white); filter: drop-shadow(0 0 10px rgba(255, 236, 210, .5)); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
+.brand svg { display: block; width: 74px; height: 42px; fill: var(--fg); filter: drop-shadow(0 0 10px var(--glow)); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1), fill 1s; }
 .brand:hover svg { transform: rotate(180deg); }
 .right { justify-self: end; }
 .theme {
   position: relative; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line);
-  background: rgba(255, 255, 255, .06); backdrop-filter: blur(6px); color: var(--white); cursor: pointer;
+  background: rgba(255, 255, 255, .1); backdrop-filter: blur(6px); color: var(--fg); cursor: pointer;
   display: grid; place-items: center; transition: border-color .3s;
 }
-.theme:hover { border-color: var(--white); }
+.theme:hover { border-color: var(--fg); }
 .theme svg { position: absolute; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; transition: opacity .5s, transform .8s cubic-bezier(.4, 0, .2, 1); }
 .theme .moon { fill: currentColor; stroke: none; }
 /* Show the mode you'd switch to. */
 [data-theme="dark"] .theme .moon, [data-theme="light"] .theme .sun { opacity: 0; transform: rotate(-90deg) scale(.4); }
-.left a:focus-visible, .brand:focus-visible, .theme:focus-visible { outline: 2px solid var(--white); outline-offset: 5px; border-radius: 4px; }
+.left a:focus-visible, .brand:focus-visible, .theme:focus-visible { outline: 2px solid var(--fg); outline-offset: 5px; border-radius: 4px; }
 
 /* hero */
 .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
 .giant { margin: 4vh 0 0; line-height: 1; font-weight: 400; }
 .giant span {
   display: inline-block; font: 400 clamp(96px, 19vw, 300px)/0.8 var(--serif); letter-spacing: -.01em;
-  transform: scaleY(1.42); transform-origin: center; text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
+  transform: scaleY(1.42); transform-origin: center; text-shadow: 0 0 60px var(--glow);
 }
 .below { margin-top: 15vh; display: flex; flex-direction: column; align-items: center; }
-.kicker { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--serif); letter-spacing: .03em; text-transform: uppercase; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
-.sub { margin: 12px 0 22px; color: var(--white-2); font-size: 15px; }
+.kicker { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--serif); letter-spacing: .03em; text-transform: uppercase; margin: 0; text-shadow: 0 0 24px var(--glow); }
+.sub { margin: 12px 0 22px; color: var(--fg-2); font-size: 15px; }
 .join { display: flex; width: min(320px, 82vw); border-bottom: 1px solid var(--line); transition: border-color .3s; }
-.join:focus-within { border-color: var(--white); }
-.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 15px var(--sans); padding: 9px 0; outline: none; }
-.join input::placeholder { color: var(--white-2); }
-.join button { border: 0; background: transparent; color: var(--white); font: 400 17px var(--serif); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; padding: 9px 0 9px 14px; }
+.join:focus-within { border-color: var(--fg); }
+.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--fg); font: 400 15px var(--sans); padding: 9px 0; outline: none; }
+.join input::placeholder { color: var(--fg-2); }
+.join button { border: 0; background: transparent; color: var(--fg); font: 400 17px var(--serif); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; padding: 9px 0 9px 14px; }
 .join button:hover { opacity: .7; }
-.note { font-size: 12px; color: var(--white-2); min-height: 1.5em; margin: 10px 0 0; }
+.note { font-size: 12px; color: var(--fg-2); min-height: 1.5em; margin: 10px 0 0; }
 
-.foot { display: flex; justify-content: space-between; padding: 16px 28px; font-size: 11px; color: var(--white-2); letter-spacing: .02em; }
-.credit.night { display: none; }
-[data-theme="dark"] .credit.day { display: none; }
-[data-theme="dark"] .credit.night { display: inline; }
+.foot { display: flex; justify-content: space-between; padding: 16px 28px; font-size: 11px; color: var(--fg-2); letter-spacing: .02em; }
 
 @media (max-width: 600px) {
   .nav { padding: 16px; }
