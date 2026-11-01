@@ -1,6 +1,6 @@
 // Soft particles that belong to the photo rather than sitting on top of it.
 //   Night: faint warm-cream specks of starlight that twinkle slowly in the sky.
-//   Day:   pale-gold dust / grass seed drifting sideways like wind over the grassland.
+//   Day:   pale-gold dust drifting sideways like wind, in the sky above the grassland.
 // Clearly visible but quiet at rest; they brighten, drift away from the cursor and
 // ease back slowly. They fade out around the text, and the effect is off on touch
 // devices and for people who ask for reduced motion.
@@ -13,8 +13,8 @@
   if (off) return;
 
   const MODES = {
-    dark: { rgb: "255,244,226", top: 0, bottom: 0.6 },    // warm cream, sky only
-    light: { rgb: "255,247,226", top: 0.2, bottom: 0.95 }, // sunlit pale gold, bright enough to read on the pale sky
+    dark: { rgb: "255,244,226", top: 0, bottom: 0.52 },   // warm cream, sky only
+    light: { rgb: "255,247,226", top: 0, bottom: 0.52 },   // sunlit pale gold, sky only
   };
   const R = 170;          // cursor reach
   const PAD = 36, FADE = 70; // clear zone around text, then fade back in
