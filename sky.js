@@ -39,8 +39,9 @@
 
   function measureText() {
     textRects = [".giant span", ".kicker", ".sub", ".join"]
-      .map((sel) => document.querySelector(sel)?.getBoundingClientRect())
-      .filter(Boolean);
+      .map((sel) => document.querySelector(sel))
+      .filter((el) => el && getComputedStyle(el).visibility !== "hidden") // skip text that has faded away
+      .map((el) => el.getBoundingClientRect());
   }
 
   // 0 inside the padded text box, rising to 1 over FADE px.
@@ -123,6 +124,7 @@
   document.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
   addEventListener("resize", build);
   document.fonts?.ready.then(measureText);
+  addEventListener("marfa:text", measureText); // app.js: the slogan has faded or new text appeared
   // Rebuild with the other mode's particles when the theme switches.
   new MutationObserver(build).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
 

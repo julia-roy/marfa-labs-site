@@ -113,6 +113,13 @@ a { color: inherit; }
 /* The full stop after "A place to think" blinks, as if the sentence could go on. */
 .blink { animation: blink 1.1s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
+/* After five blinks the sentence dissolves, like the Marfa lights; then the agent line and email field
+   fade in where they always sit (app.js adds .gone and .revealed). */
+.kicker.gone { opacity: 0; filter: blur(6px); visibility: hidden; transition: opacity 1.8s ease, filter 1.8s ease, visibility 0s linear 1.8s; }
+.js .below:not(.revealed) :is(.sub, .join, .note) { opacity: 0; visibility: hidden; animation: show 0s 20s forwards; } /* failsafe if the script never runs */
+.below.revealed :is(.sub, .join, .note) { transition: opacity 1.4s ease; }
+.below.revealed .join { transition-delay: .3s; }
+@keyframes show { to { opacity: 1; visibility: visible; } }
 /* Two groups: title + slogan low in the sky; agent line + email together in the grass. */
 /* MARFA sits right under the star, as one mark. It is placed against the top of the hero (just below the bar);
    an invisible copy keeps the space it used to take, so nothing else moves. */
