@@ -22,7 +22,7 @@ document.getElementById("join").addEventListener("submit", (e) => {
 
 // "A place to think" writes itself in, letter by letter, as if someone were typing it live.
 // When it's done, the blinking full stop takes over, as if the sentence could go on.
-// After five blinks the sentence fades away, like the Marfa lights, and the agent line
+// After three blinks the sentence fades away, like the Marfa lights, and the agent line
 // and the email field appear in its place.
 (() => {
   const line = document.querySelector(".kicker");
@@ -43,7 +43,7 @@ document.getElementById("join").addEventListener("submit", (e) => {
   }
   let blinks = 0;
   dot.addEventListener("animationiteration", () => {
-    if (++blinks !== 5) return;
+    if (++blinks !== 3) return;
     line.classList.add("gone");
     setTimeout(() => below.classList.add("revealed"), 1400);
     setTimeout(() => dispatchEvent(new Event("marfa:text")), 1900); // let the stars back where the sentence was
