@@ -144,6 +144,9 @@ a { color: inherit; }
 .note { font-size: 12px; color: var(--white-2); min-height: 1.5em; margin: 10px 0 0; }
 
 .foot { display: flex; justify-content: space-between; padding: 16px 28px; font-size: 11px; color: var(--white-2); letter-spacing: .02em; }
+/* Contact sits centred at the very bottom (bottom-right on phones). */
+.contact { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); text-decoration: none; pointer-events: auto; transition: color .3s; }
+.contact:hover { color: var(--white); }
 .credit.night { display: none; }
 [data-theme="dark"] .credit.day { display: none; }
 [data-theme="dark"] .credit.night { display: inline; }
@@ -173,6 +176,7 @@ a { color: inherit; }
   .join input { font-size: 16px; padding: 13px 0 13px 18px; }
   .join button { font-size: 16px; padding: 0 22px; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
+  .contact { left: auto; right: 16px; bottom: 14px; transform: none; }
   /* While the Solutions menu is open, the page text fades out so the items sit alone on the sky. */
   .hero { transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
   body:has(.menu:hover, .menu:focus-within) .nav { z-index: 3; }

@@ -18,10 +18,25 @@ toggle.addEventListener("click", () => {
 // and give the white back to Research (a click listener also makes iOS treat it as tappable).
 document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
 
-// Waitlist: placeholder until a form backend (Formspree) is connected.
-document.getElementById("join").addEventListener("submit", (e) => {
+// Waitlist: sends the email to Formspree (the form's action is the Formspree endpoint).
+// Without an action it keeps the old placeholder message.
+const form = document.getElementById("join");
+const note = document.getElementById("note");
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  document.getElementById("note").textContent = "[ The waitlist opens in a few days ]";
+  if (!form.getAttribute("action")) { note.textContent = "[ The waitlist opens in a few days ]"; return; }
+  const button = form.querySelector("button");
+  button.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    note.textContent = "You're on the list. We'll be in touch.";
+  } catch {
+    note.textContent = "Something went wrong. Please try again.";
+  } finally {
+    button.disabled = false;
+  }
 });
 
 // "A place to think" writes itself in, letter by letter, as if someone were typing it live.
