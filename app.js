@@ -46,7 +46,7 @@ document.getElementById("join").addEventListener("submit", (e) => {
   const type = () => {
     chars[i++].classList.add("on");
     line.insertBefore(caret, chars[i] || dot);
-    if (i < chars.length) setTimeout(type, 70 + Math.random() * 90); // uneven, like a hand on keys
+    if (i < chars.length) setTimeout(type, 40 + Math.random() * 55); // uneven, like a hand on keys
     else setTimeout(() => { caret.remove(); dot.classList.remove("wait"); }, 350);
   };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(type, 600));

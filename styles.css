@@ -5,7 +5,7 @@
   --white-2: rgba(251, 247, 240, 0.78);
   --line: rgba(251, 247, 240, 0.45);
   --serif: "Marcellus", "Optima", Georgia, serif;
-  --sans: "Inter", system-ui, sans-serif;
+  --sans: "Geist Mono", ui-monospace, monospace;
   color-scheme: light;
 }
 :root[data-theme="dark"] { color-scheme: dark; }
@@ -150,6 +150,7 @@ a { color: inherit; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { top: -8px; } /* a little more air below the bar on phones */
   .below { margin-top: 7vh; }
+  .sub { font-size: 11.5px; line-height: 22.5px; } /* the mono line fits on one line; same line height, so the email field stays put */
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
   /* While the Solutions menu is open, the page text fades out so the items sit alone on the sky. */
   .hero { transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
