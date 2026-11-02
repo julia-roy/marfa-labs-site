@@ -44,10 +44,13 @@ a { color: inherit; }
   justify-self: start; display: flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px;
   background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
-.left a { font: 400 16px/1 var(--serif); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s, text-shadow .3s; }
+.left a { font: 400 16px/1 var(--sans); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s, text-shadow .3s; }
 .left a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* halo */
 .left > a, .menu > a { padding: 7px 16px; border-radius: 999px; transition: background-color .45s cubic-bezier(.22, .61, .36, 1), color .45s cubic-bezier(.22, .61, .36, 1); }
-.left > a:hover, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
+/* Like a switch, one of the two is always white: Research by default, Solutions while its menu is open. */
+.left > a, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
+.left:has(.menu:hover, .menu:focus-within) > a { background: transparent; color: var(--white); }
+.left > a { cursor: default; } /* Research has no link for now */
 /* Solutions dropdown: opens on hover or keyboard focus. */
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
 /* A rounded frosted panel in the same glass as the nav pill; the item you hover fills with white. */
@@ -125,7 +128,7 @@ a { color: inherit; }
 .join:focus-within { border-color: var(--white); }
 .join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 15px var(--sans); padding: 9px 0 9px 14px; outline: none; }
 .join input::placeholder { color: var(--white-2); }
-.join button { border: 0; background: var(--white); color: #1d1a16; font: 400 15px var(--serif); letter-spacing: .02em; cursor: pointer; align-self: stretch; padding: 0 18px; border-radius: 999px; }
+.join button { border: 0; background: var(--white); color: #1d1a16; font: 400 15px var(--sans); letter-spacing: .02em; cursor: pointer; align-self: stretch; padding: 0 18px; border-radius: 999px; }
 .join button:hover { opacity: .7; }
 .note { font-size: 12px; color: var(--white-2); min-height: 1.5em; margin: 10px 0 0; }
 
@@ -139,7 +142,7 @@ a { color: inherit; }
   .nav { gap: 4px; } /* room for the pill while the star stays centred */
   .left a { font-size: 11px; }
   .left { padding: 2px; gap: 0; }
-  .left > a, .menu > a { font-size: 10px; letter-spacing: .02em; padding: 8px 6.5px; }
+  .left > a, .menu > a { font-size: 9.5px; letter-spacing: 0; padding: 8px 6px; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { transform: scale(.65); }
   .below { margin-top: 7vh; }
