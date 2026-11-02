@@ -79,7 +79,6 @@ a { color: inherit; }
 .menu:hover .dropdown a:nth-child(2), .menu:focus-within .dropdown a:nth-child(2) { transition-delay: .06s; }
 .menu:hover .dropdown a:nth-child(3), .menu:focus-within .dropdown a:nth-child(3) { transition-delay: .12s; }
 .menu:hover .dropdown a:nth-child(4), .menu:focus-within .dropdown a:nth-child(4) { transition-delay: .18s; }
-.menu:hover .dropdown a:nth-child(5), .menu:focus-within .dropdown a:nth-child(5) { transition-delay: .24s; }
 .brand { justify-self: center; display: block; }
 .brand svg { display: block; width: 116px; height: 30px; fill: var(--white); transition: transform 1.4s cubic-bezier(.3, 0, .2, 1); }
 .brand:hover svg { transform: rotate(180deg); }
