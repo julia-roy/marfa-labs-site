@@ -14,6 +14,10 @@ toggle.addEventListener("click", () => {
   setLabel();
 });
 
+// Research has no page yet, but tapping it on a phone should still close the Solutions menu
+// and give the white back to Research (a click listener also makes iOS treat it as tappable).
+document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
+
 // Waitlist: placeholder until a form backend (Formspree) is connected.
 document.getElementById("join").addEventListener("submit", (e) => {
   e.preventDefault();

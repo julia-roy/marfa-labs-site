@@ -126,7 +126,7 @@ a { color: inherit; }
 .giant::before { content: "MARFA"; visibility: hidden; display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em; }
 .giant > span { position: absolute; left: 50%; top: -10px; transform: translateX(-50%) scale(.65); transform-origin: 50% 0; }
 .kicker { position: relative; top: -13vh; transform: scale(1.4); } /* bigger (never smaller than the nav) without moving the lines below */
-.sub { position: relative; top: 12.5vh; } /* agent line + email sit lower, alone in the grass */
+.sub { position: relative; top: calc(12.5vh - 12px); } /* agent line + email sit lower, alone in the grass; the line sits a little above the field */
 .join, .note { position: relative; top: 12vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: 15px; }
