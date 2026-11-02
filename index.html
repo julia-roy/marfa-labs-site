@@ -16,13 +16,14 @@
     try { t = localStorage.getItem("marfa-theme"); } catch {}
     if (t !== "dark") t = "light";
     document.documentElement.dataset.theme = t;
+    document.documentElement.classList.add("js"); // lets the wordmark start hidden, then type in
   })();
 </script>
 <link rel="preload" as="image" href="img/marfa-day.jpg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=36">
+<link rel="stylesheet" href="styles.css?v=37">
 </head>
 <body>
 
@@ -57,7 +58,7 @@
 <main class="hero">
   <h1 class="giant" aria-label="Marfa Labs"><span>MARFA</span></h1>
   <div class="below">
-    <p class="kicker">A place to think.</p>
+    <p class="kicker">A place to think<span class="blink">.</span></p>
     <p class="sub">A writing agent with range. Private beta, 2027.</p>
     <form class="join" id="join">
       <input id="email" type="email" name="email" required placeholder="Your email" aria-label="Email">
@@ -73,7 +74,7 @@
   <span class="credit night">Photo: Alex Moliski / Unsplash</span>
 </footer>
 
-<script src="sky.js?v=36"></script>
-<script src="app.js?v=36"></script>
+<script src="sky.js?v=37"></script>
+<script src="app.js?v=37"></script>
 </body>
 </html>

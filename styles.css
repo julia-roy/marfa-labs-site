@@ -79,11 +79,20 @@ a { color: inherit; }
 /* hero */
 .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
 .giant { margin: 4vh 0 0; line-height: 1; font-weight: 400; }
-.giant span {
+.giant > span {
   display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em;
-  transform: scale(.87, 1.235); transform-origin: center; /* .87 = a bit smaller without moving the layout below */ text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
+  transform: scale(.65, .923); transform-origin: center; /* scaled down without moving the layout below */ text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
 }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
+/* MARFA types itself in on load (letters are split into .ch by app.js). */
+.js .giant > span:not(.ready) { opacity: 0; }
+.giant .ch { opacity: 0; transition: opacity .12s; }
+.giant .ch.on { opacity: 1; }
+.giant .caret { display: inline-block; width: 0; height: .72em; position: relative; }
+.giant .caret::after { content: ""; position: absolute; left: .04em; top: 0; bottom: 0; border-left: .05em solid currentColor; animation: blink 1s steps(2, start) infinite; }
+/* The full stop after "A place to think" blinks, as if the sentence could go on. */
+.blink { animation: blink 1.1s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
 /* Two groups: title + slogan low in the sky; agent line + email together in the grass. */
 .giant { position: relative; top: -9vh; }
 .kicker { position: relative; top: -13vh; transform: scale(1.15); } /* slightly bigger without moving the lines below */
@@ -110,10 +119,11 @@ a { color: inherit; }
   .left { gap: 12px; }
   .left a { font-size: 11px; }
   .brand svg { width: 64px; height: 16px; }
-  .giant span { transform: scale(.87, 1.305); }
+  .giant > span { transform: scale(.65, .975); }
   .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
+  .blink, .giant .caret::after { animation: none; }
 }
