@@ -149,11 +149,12 @@ a { color: inherit; }
 [data-theme="dark"] .credit.night { display: inline; }
 
 @media (max-width: 600px) {
-  .nav { padding: 16px; }
+  .nav { padding: 13px 16px; } /* the bar stays 70px tall with the bigger pill */
   .nav { gap: 10px; }
   .left a { font-size: 11px; }
-  .left { padding: 2px; gap: 0; }
-  .left > a, .menu > a { font-size: 11px; letter-spacing: .02em; padding: 8px 10px; }
+  .left { padding: 3px; gap: 2px; position: relative; }
+  .menu { position: static; } /* the Solutions panel lines up with the pill's left edge, so it fits narrow phones */
+  .left > a, .menu > a { font-size: 13px; letter-spacing: .02em; padding: 11.5px 16px; } /* about 44px tall: comfortable for a finger */
   /* On phones the pill is the only thing in the top bar; the star (with MARFA under it) sits lower, centred,
      and the theme button moves to the bottom-right corner. The bar keeps its height, so nothing else moves. */
   .nav { min-height: 70px; }
