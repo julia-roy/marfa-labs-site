@@ -82,7 +82,7 @@ a { color: inherit; }
 .giant { margin: 4vh 0 0; line-height: 1; font-weight: 400; }
 .giant > span {
   display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em;
-  transform: scale(.65, .923); transform-origin: center; /* scaled down without moving the layout below */ text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
+  transform: scale(.65); transform-origin: center; /* natural proportions, scaled without moving the layout below */ text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
 }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
 /* "A place to think" types itself in on load (letters are split into .ch by app.js). */
@@ -121,7 +121,7 @@ a { color: inherit; }
   .left { gap: 12px; }
   .left a { font-size: 11px; }
   .brand svg { width: 64px; height: 16px; }
-  .giant > span { transform: scale(.65, .975); }
+  .giant > span { transform: scale(.65); }
   .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
 }
