@@ -39,13 +39,19 @@ a { color: inherit; }
 
 /* nav */
 .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 28px; }
-.left { display: flex; gap: 28px; }
+/* Research and Solutions sit in one soft, rounded pill; the one you hover fills with white. */
+.left {
+  justify-self: start; display: flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px;
+  background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
 .left a { font: 400 16px/1 var(--serif); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s, text-shadow .3s; }
 .left a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* halo */
+.left > a, .menu > a { padding: 7px 16px; border-radius: 999px; transition: background-color .45s cubic-bezier(.22, .61, .36, 1), color .45s cubic-bezier(.22, .61, .36, 1); }
+.left > a:hover, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
 /* Solutions dropdown: opens on hover or keyboard focus. */
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
 .dropdown {
-  position: absolute; top: 100%; left: 0; padding-top: 16px; /* padding bridges the hover gap */
+  position: absolute; top: 100%; left: 16px; padding-top: 16px; /* lined up with the SOLUTIONS text; padding bridges the hover gap */
   display: flex; flex-direction: column; min-width: 240px;
   visibility: hidden; transition: visibility 0s linear .5s;
 }
@@ -104,11 +110,16 @@ a { color: inherit; }
 .join, .note { position: relative; top: 4vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: 15px; }
-.join { display: flex; width: min(320px, 82vw); border-bottom: 1px solid var(--line); transition: border-color .3s; }
+/* A rounded pill like the nav; the negative margin keeps the text exactly where the old underline field had it. */
+.join {
+  display: flex; align-items: center; width: min(320px, 82vw); padding: 4px; margin: -2.75px 0; border-radius: 999px;
+  background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: border-color .3s;
+}
 .join:focus-within { border-color: var(--white); }
-.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 15px var(--sans); padding: 9px 0; outline: none; }
+.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 15px var(--sans); padding: 9px 0 9px 14px; outline: none; }
 .join input::placeholder { color: var(--white-2); }
-.join button { border: 0; background: transparent; color: var(--white); font: 400 17px var(--serif); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; padding: 9px 0 9px 14px; }
+.join button { border: 0; background: var(--white); color: #1d1a16; font: 400 15px var(--serif); letter-spacing: .02em; cursor: pointer; align-self: stretch; padding: 0 18px; border-radius: 999px; }
 .join button:hover { opacity: .7; }
 .note { font-size: 12px; color: var(--white-2); min-height: 1.5em; margin: 10px 0 0; }
 
@@ -119,13 +130,20 @@ a { color: inherit; }
 
 @media (max-width: 600px) {
   .nav { padding: 16px; }
-  .nav { gap: 10px; }
-  .left { gap: 12px; }
+  .nav { gap: 4px; } /* room for the pill while the star stays centred */
   .left a { font-size: 11px; }
+  .left { padding: 2px; gap: 0; }
+  .left > a, .menu > a { font-size: 10px; letter-spacing: .02em; padding: 8px 6.5px; }
+  .dropdown { left: 6.5px; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { transform: scale(.65); }
   .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
+  /* While the Solutions menu is open, the page text fades out so the items sit alone on the sky. */
+  .hero { transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
+  body:has(.menu:hover, .menu:focus-within) .nav { z-index: 3; }
+  body:has(.menu:hover, .menu:focus-within) .hero { opacity: 0; pointer-events: auto; cursor: pointer; } /* a tap anywhere closes the menu */
+  body:has(.menu:hover, .menu:focus-within) .hero * { pointer-events: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
