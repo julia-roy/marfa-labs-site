@@ -50,7 +50,7 @@ a { color: inherit; }
   visibility: hidden; transition: visibility 0s linear .5s;
 }
 .left .dropdown a { /* .left raises specificity so phones get the bigger size too */
-  position: relative; font-size: 17px; padding: 15px 0; white-space: nowrap;
+  position: relative; font-size: 15px; padding: 13px 0; white-space: nowrap;
   text-shadow: 0 1px 14px rgba(0, 0, 0, .35); /* stays readable over the bright day sky */
   opacity: 0; transform: translateY(-6px);
   transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), text-shadow .3s;
