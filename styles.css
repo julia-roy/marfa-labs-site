@@ -129,7 +129,7 @@ a { color: inherit; }
 .sub { position: relative; top: calc(12.5vh - 12px); } /* agent line + email sit lower, alone in the grass; the line sits a little above the field */
 .join, .note { position: relative; top: 12vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
-.sub { margin: 12px 0 22px; color: var(--white-2); font-size: 17px; line-height: 22.5px; } /* same line height as before, so nothing moves */
+.sub { margin: 12px 0 22px; color: var(--white-2); font-size: 19px; line-height: 22.5px; } /* same line height as before, so nothing moves */
 /* A rounded pill like the nav; the negative margin keeps the text exactly where the old underline field had it. */
 .join {
   display: flex; align-items: center; width: min(320px, 82vw); padding: 4px; margin: -2.75px 0; border-radius: 999px;
@@ -163,10 +163,15 @@ a { color: inherit; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { top: calc(15vh - 44px); } /* just under the star */
   .below { margin-top: 7vh; }
-  .sub { font-size: 12px; } /* the mono line still fits on one line */
+  .sub { font-size: 14px; margin-bottom: -.5px; } /* two lines now; the smaller margin keeps the layout height, so nothing above moves */
+  .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line and email field take the slogan's place once it has faded, instead of sitting low. */
-  .sub { top: calc(-13vh - 32px); }
-  .join, .note { top: calc(-13vh - 24px); }
+  .sub { top: calc(-13vh - 43px); }
+  .join, .note { top: calc(-13vh - 13px); }
+  /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
+  .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
+  .join input { font-size: 16px; padding: 13px 0 13px 18px; }
+  .join button { font-size: 16px; padding: 0 22px; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
   /* While the Solutions menu is open, the page text fades out so the items sit alone on the sky. */
   .hero { transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
