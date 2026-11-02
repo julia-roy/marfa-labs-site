@@ -153,7 +153,7 @@ a { color: inherit; }
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line sits where the slogan used to be, higher up in the sky. */
   .sub { top: calc(-13vh - 43px + clamp(15px, 1.5vw, 21px) * .6); }
-  .join, .note { top: calc(17.5vh - 22.5px + clamp(15px, 1.5vw, 21px) * .6); } /* the field starts at ~73% of the screen height: below the mountain at night, in the grass by day */
+  .join, .note { top: calc(17.5vh - 37.5px + clamp(15px, 1.5vw, 21px) * .6); } /* the field starts just under the mountain line: mountain visible at night, in the grass by day */
   /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
   .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
   .join input { font-size: 16px; padding: 13px 0 13px 18px; }
