@@ -85,12 +85,13 @@ a { color: inherit; }
   transform: scale(.65, .923); transform-origin: center; /* scaled down without moving the layout below */ text-shadow: 0 2px 40px rgba(0, 0, 0, .12);
 }
 .below { margin-top: 9vh; display: flex; flex-direction: column; align-items: center; }
-/* MARFA types itself in on load (letters are split into .ch by app.js). */
-.js .giant > span:not(.ready) { opacity: 0; }
-.giant .ch { opacity: 0; transition: opacity .12s; }
-.giant .ch.on { opacity: 1; }
-.giant .caret { display: inline-block; width: 0; height: .72em; position: relative; }
-.giant .caret::after { content: ""; position: absolute; left: .04em; top: 0; bottom: 0; border-left: .05em solid currentColor; animation: blink 1s steps(2, start) infinite; }
+/* "A place to think" types itself in on load (letters are split into .ch by app.js). */
+.js .kicker:not(.ready) { opacity: 0; }
+.kicker .ch { opacity: 0; transition: opacity .1s; }
+.kicker .ch.on { opacity: 1; }
+.kicker .caret { display: inline-block; width: 0; height: .8em; position: relative; vertical-align: -.08em; }
+.kicker .caret::after { content: ""; position: absolute; left: .06em; top: 0; bottom: 0; border-left: .07em solid currentColor; animation: blink 1s steps(2, start) infinite; }
+.kicker .blink.wait { visibility: hidden; animation: none; } /* the dot appears once the typing is done */
 /* The full stop after "A place to think" blinks, as if the sentence could go on. */
 .blink { animation: blink 1.1s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
@@ -126,5 +127,5 @@ a { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
-  .blink, .giant .caret::after { animation: none; }
+  .blink, .kicker .caret::after { animation: none; }
 }

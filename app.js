@@ -20,27 +20,34 @@ document.getElementById("join").addEventListener("submit", (e) => {
   document.getElementById("note").textContent = "[ The waitlist opens in a few days ]";
 });
 
-// MARFA writes itself in, letter by letter, as if someone were typing it live.
+// "A place to think" writes itself in, letter by letter, as if someone were typing it live.
+// When it's done, the blinking full stop takes over, as if the sentence could go on.
 (() => {
-  const word = document.querySelector(".giant > span");
-  const chars = [...word.textContent].map((c) => {
+  const line = document.querySelector(".kicker");
+  const dot = line.querySelector(".blink");
+  const text = line.firstChild.textContent;
+  const chars = [...text].map((c) => {
     const s = document.createElement("span");
     s.className = "ch"; s.textContent = c;
     return s;
   });
-  word.replaceChildren(...chars);
-  word.classList.add("ready");
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { chars.forEach((c) => c.classList.add("on")); return; }
-
+  line.firstChild.replaceWith(...chars);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    chars.forEach((c) => c.classList.add("on"));
+    line.classList.add("ready");
+    return;
+  }
+  dot.classList.add("wait");
   const caret = document.createElement("span");
   caret.className = "caret";
-  word.insertBefore(caret, chars[0]);
+  line.insertBefore(caret, chars[0]);
+  line.classList.add("ready");
   let i = 0;
   const type = () => {
     chars[i++].classList.add("on");
-    word.insertBefore(caret, chars[i] || null);
-    if (i < chars.length) setTimeout(type, 140 + Math.random() * 110); // uneven, like a hand on keys
-    else setTimeout(() => caret.remove(), 1200);
+    line.insertBefore(caret, chars[i] || dot);
+    if (i < chars.length) setTimeout(type, 70 + Math.random() * 90); // uneven, like a hand on keys
+    else setTimeout(() => { caret.remove(); dot.classList.remove("wait"); }, 350);
   };
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(type, 500));
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(type, 600));
 })();
