@@ -155,11 +155,11 @@ a { color: inherit; }
   .left { padding: 3px; gap: 2px; position: relative; }
   .menu { position: static; } /* the Solutions panel lines up with the pill's left edge, so it fits narrow phones */
   .left > a, .menu > a { font-size: 13px; letter-spacing: .02em; padding: 11.5px 16px; } /* about 44px tall: comfortable for a finger */
-  /* On phones the pill is the only thing in the top bar; the star (with MARFA under it) sits lower, centred,
-     and the theme button moves to the bottom-right corner. The bar keeps its height, so nothing else moves. */
+  /* On phones the top bar holds just the pill and the theme button; the star (with MARFA under it) sits lower, centred,
+     and the theme button stays top-right. The bar keeps its height, so nothing else moves. */
   .nav { min-height: 70px; }
   .brand { position: absolute; top: 15vh; left: 50%; transform: translateX(-50%); transition: opacity .5s; }
-  .right { position: fixed; right: 16px; bottom: 14px; }
+  .right { grid-column: 3; } /* stays on the right edge now that the star has left the middle */
   .brand svg { width: 64px; height: 16px; }
   .giant > span { top: calc(15vh - 44px); } /* just under the star */
   .below { margin-top: 7vh; }
@@ -167,7 +167,7 @@ a { color: inherit; }
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line and email field take the slogan's place once it has faded, instead of sitting low. */
   .sub { top: calc(-13vh - 43px); }
-  .join, .note { top: calc(-13vh - 13px); }
+  .join, .note { top: 4vh; } /* the email field sits in the grass, below the agent line */
   /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
   .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
   .join input { font-size: 16px; padding: 13px 0 13px 18px; }
