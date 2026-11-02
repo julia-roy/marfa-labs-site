@@ -39,7 +39,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// "A place to think" writes itself in, letter by letter, as if someone were typing it live.
+// The slogan writes itself in, letter by letter, as if someone were typing it live.
 // When it's done, the blinking full stop takes over, as if the sentence could go on.
 // After three blinks the sentence fades away, like the Marfa lights, and the agent line
 // and the email field appear in its place.
@@ -48,12 +48,22 @@ form.addEventListener("submit", async (e) => {
   const below = document.querySelector(".below");
   const dot = line.querySelector(".blink");
   const text = line.firstChild.textContent;
-  const chars = [...text].map((c) => {
+  const chars = [];
+  const letter = (c) => {
     const s = document.createElement("span");
     s.className = "ch"; s.textContent = c;
+    chars.push(s);
     return s;
+  };
+  // Letters are grouped into words, so a line only ever breaks between words.
+  const parts = text.split(/(\s+)/).filter(Boolean).map((part) => {
+    if (/^\s+$/.test(part)) return letter(part);
+    const word = document.createElement("span");
+    word.className = "word";
+    word.append(...[...part].map(letter));
+    return word;
   });
-  line.firstChild.replaceWith(...chars);
+  line.firstChild.replaceWith(...parts);
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
     chars.forEach((c) => c.classList.add("on"));
     line.classList.add("ready");
@@ -70,12 +80,12 @@ form.addEventListener("submit", async (e) => {
   dot.classList.add("wait");
   const caret = document.createElement("span");
   caret.className = "caret";
-  line.insertBefore(caret, chars[0]);
+  chars[0].before(caret);
   line.classList.add("ready");
   let i = 0;
   const type = () => {
     chars[i++].classList.add("on");
-    line.insertBefore(caret, chars[i] || dot);
+    if (chars[i]) chars[i].before(caret); else chars[i - 1].after(caret);
     if (i < chars.length) setTimeout(type, 40 + Math.random() * 55); // uneven, like a hand on keys
     else setTimeout(() => { caret.remove(); dot.classList.remove("wait"); }, 350);
   };

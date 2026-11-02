@@ -106,6 +106,7 @@ a { color: inherit; }
 /* "A place to think" types itself in on load (letters are split into .ch by app.js). */
 .js .kicker:not(.ready) { opacity: 0; }
 .kicker .ch { opacity: 0; transition: opacity .1s; }
+.kicker .word { white-space: nowrap; }
 .kicker .ch.on { opacity: 1; }
 .kicker .caret { display: inline-block; width: 0; height: .8em; position: relative; vertical-align: -.08em; }
 .kicker .caret::after { content: ""; position: absolute; left: .06em; top: 0; bottom: 0; border-left: .07em solid currentColor; animation: blink 1s steps(2, start) infinite; }
@@ -166,6 +167,7 @@ a { color: inherit; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { top: calc(15vh - 44px); } /* just under the star */
   .below { margin-top: 7vh; }
+  .kicker { max-width: 240px; text-wrap: balance; margin: -9px 0; } /* two balanced lines on phones; the negative margins keep its centre and the layout unchanged */
   .sub { font-size: 14px; margin-bottom: -.5px; } /* two lines now; the smaller margin keeps the layout height, so nothing above moves */
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line and email field take the slogan's place once it has faded, instead of sitting low. */
