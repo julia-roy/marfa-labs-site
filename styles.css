@@ -167,7 +167,7 @@ a { color: inherit; }
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line and email field take the slogan's place once it has faded, instead of sitting low. */
   .sub { top: calc(-13vh - 43px); }
-  .join, .note { top: 4vh; } /* the email field sits in the grass, below the agent line */
+  .join, .note { top: -1vh; } /* where the grass begins by day, just above the mountain at night */
   /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
   .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
   .join input { font-size: 16px; padding: 13px 0 13px 18px; }
