@@ -8,7 +8,7 @@
 <meta property="og:title" content="Marfa Labs">
 <meta property="og:description" content="Writing that doesn't sound like a machine.">
 <meta property="og:image" content="https://marfa-labs.com/img/marfa-day.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-24 -24 48 48'><rect x='-24' y='-24' width='48' height='48' rx='11' fill='%23ffffff'/><path d='M-22 0 Q-6 -1.2 0 -1.8 Q6 -1.2 22 0 Q6 1.2 0 1.8 Q-6 1.2 -22 0Z' fill='%23161427'/><path d='M10.96 -10.96 Q3.29 -4.99 0 -3.4 Q-3.03 -4.73 -10.11 -10.11 Q-4.73 -3.03 -3.4 0 Q-4.92 3.22 -10.75 10.75 Q-3.22 4.92 0 3.4 Q2.97 4.67 9.9 9.9 Q4.67 2.97 3.4 0 Q4.99 -3.29 10.96 -10.96Z' fill='%23161427'/></svg>">
+<link rel="icon" id="favicon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%239fb0b3'/><stop offset='0.52' stop-color='%23cdd5d1'/><stop offset='0.74' stop-color='%23aa9b66'/><stop offset='1' stop-color='%23857640'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><path d='M32 8 Q35 29 53 32 Q35 35 32 56 Q29 35 11 32 Q29 29 32 8Z' fill='%23f8f4ec'/></svg>">
 <script>
   // Apply the saved theme (light by default) before paint, so there's no flash.
   (() => {
@@ -17,13 +17,16 @@
     if (t !== "dark") t = "light";
     document.documentElement.dataset.theme = t;
     document.documentElement.classList.add("js"); // lets the wordmark start hidden, then type in
+    // Tab icon: day sky by default, purple dusk in dark mode.
+    window.MARFA_ICONS = { light: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%239fb0b3'/><stop offset='0.52' stop-color='%23cdd5d1'/><stop offset='0.74' stop-color='%23aa9b66'/><stop offset='1' stop-color='%23857640'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><path d='M32 8 Q35 29 53 32 Q35 35 32 56 Q29 35 11 32 Q29 29 32 8Z' fill='%23f8f4ec'/></svg>", dark: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%232a2340'/><stop offset='0.5' stop-color='%23433657'/><stop offset='0.76' stop-color='%238a6578'/><stop offset='1' stop-color='%233a2b33'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><path d='M32 8 Q35 29 53 32 Q35 35 32 56 Q29 35 11 32 Q29 29 32 8Z' fill='%23f8f4ec'/></svg>" };
+    document.getElementById("favicon").href = window.MARFA_ICONS[t];
   })();
 </script>
 <link rel="preload" as="image" href="img/marfa-day.jpg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=37">
+<link rel="stylesheet" href="styles.css?v=38">
 </head>
 <body>
 
@@ -74,7 +77,7 @@
   <span class="credit night">Photo: Alex Moliski / Unsplash</span>
 </footer>
 
-<script src="sky.js?v=37"></script>
-<script src="app.js?v=37"></script>
+<script src="sky.js?v=38"></script>
+<script src="app.js?v=38"></script>
 </body>
 </html>

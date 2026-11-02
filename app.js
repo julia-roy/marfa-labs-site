@@ -11,6 +11,7 @@ setLabel();
 toggle.addEventListener("click", () => {
   root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
   try { localStorage.setItem("marfa-theme", root.dataset.theme); } catch {}
+  if (window.MARFA_ICONS) document.getElementById("favicon").href = window.MARFA_ICONS[root.dataset.theme];
   setLabel();
 });
 
