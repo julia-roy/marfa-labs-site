@@ -33,6 +33,7 @@ a { color: inherit; }
 }
 #sky { position: fixed; inset: 0; width: 100%; height: 100%; }
 .nav, .hero, .foot { position: relative; z-index: 2; }
+.nav { z-index: 3; } /* the Solutions panel stays above MARFA, which now sits just under the bar */
 /* Let the cursor reach the star canvas everywhere except real controls. */
 .nav, .hero, .foot { pointer-events: none; }
 .nav a, .nav button, .hero form, .hero input, .hero button { pointer-events: auto; }
@@ -113,8 +114,11 @@ a { color: inherit; }
 .blink { animation: blink 1.1s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
 /* Two groups: title + slogan low in the sky; agent line + email together in the grass. */
-.giant { position: relative; top: -9vh; }
-.kicker { position: relative; top: -13vh; transform: scale(1.15); } /* slightly bigger without moving the lines below */
+/* MARFA sits right under the star, as one mark. It is placed against the top of the hero (just below the bar);
+   an invisible copy keeps the space it used to take, so nothing else moves. */
+.giant::before { content: "MARFA"; visibility: hidden; display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em; }
+.giant > span { position: absolute; left: 50%; top: -10px; transform: translateX(-50%) scale(.65); transform-origin: 50% 0; }
+.kicker { position: relative; top: -13vh; transform: scale(1.4); } /* bigger (never smaller than the nav) without moving the lines below */
 .sub { position: relative; top: 4.5vh; }
 .join, .note { position: relative; top: 4vh; }
 .kicker { font: 400 clamp(15px, 1.5vw, 21px)/1.2 var(--serif); letter-spacing: .03em; margin: 0; text-shadow: 0 1px 20px rgba(0, 0, 0, .25); }
@@ -144,7 +148,7 @@ a { color: inherit; }
   .left { padding: 2px; gap: 0; }
   .left > a, .menu > a { font-size: 9.5px; letter-spacing: 0; padding: 8px 6px; }
   .brand svg { width: 64px; height: 16px; }
-  .giant > span { transform: scale(.65); }
+  .giant > span { top: -8px; } /* a little more air below the bar on phones */
   .below { margin-top: 7vh; }
   .foot { padding: 14px 16px; flex-direction: column; gap: 2px; }
   /* While the Solutions menu is open, the page text fades out so the items sit alone on the sky. */
