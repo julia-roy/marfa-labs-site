@@ -16,11 +16,12 @@
     dark: { rgb: "255,244,226", top: 0, bottom: 0.52 },   // warm cream, sky only
     light: { rgb: "255,247,226", top: 0, bottom: 0.52 },   // sunlit pale gold, sky only
   };
-  const R = 170;          // cursor reach
+  const R = 210;          // cursor reach
   const PAD = 36, FADE = 70; // clear zone around text, then fade back in
 
   let W, H, mode, particles = [], textRects = [], sprite;
-  const pointer = { x: -9999, y: -9999 };
+  const pointer = { x: -9999, y: -9999 };            // where the cursor is
+  const glide = { x: -9999, y: -9999, vx: 0, vy: 0 }; // eased copy the stars react to
   const rand = (a, b) => a + Math.random() * (b - a);
 
   // One soft dot, pre-rendered and tinted for the current mode.
@@ -61,7 +62,8 @@
     mode = root.dataset.theme === "dark" ? "dark" : "light";
     const m = MODES[mode];
     sprite = makeSprite(m.rgb);
-    const n = Math.max(180, Math.min(360, Math.round((W * H) / 4200)));
+    const base = Math.max(180, Math.min(360, Math.round((W * H) / 4200)));
+    const n = mode === "dark" ? Math.round(base * 1.7) : base; // a fuller night sky
     particles = Array.from({ length: n }, () => {
       const hx = rand(0, W), hy = rand(m.top, m.bottom) * H;
       return {
@@ -78,6 +80,13 @@
   function frame(t) {
     ctx.clearRect(0, 0, W, H);
     const m = MODES[mode];
+    // Ease toward the cursor so the field follows it smoothly, and remember how it moved.
+    if (pointer.x < -9000) { glide.x = glide.y = -9999; glide.vx = glide.vy = 0; }
+    else if (glide.x < -9000) { glide.x = pointer.x; glide.y = pointer.y; }
+    else {
+      const nx = glide.x + (pointer.x - glide.x) * 0.3, ny = glide.y + (pointer.y - glide.y) * 0.3;
+      glide.vx = nx - glide.x; glide.vy = ny - glide.y; glide.x = nx; glide.y = ny;
+    }
     for (const p of particles) {
       if (mode === "light") {
         // Wind over the grassland: slow sideways drift with a gentle lift and fall.
@@ -86,12 +95,17 @@
         if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; p.hy = rand(m.top, m.bottom) * H; p.y = p.hy; }
       }
 
-      // Gentle: drift away from the cursor, ease back slowly.
-      const dx = p.x - pointer.x, dy = p.y - pointer.y, d = Math.hypot(dx, dy);
-      const near = d < R ? (1 - d / R) ** 2 : 0;
-      if (near > 0 && d > 0.01) { p.vx += (dx / d) * near * 0.55; p.vy += (dy / d) * near * 0.55; }
-      p.vx += (p.hx - p.x) * 0.006; p.vy += (p.hy - p.y) * 0.006;
-      p.vx *= 0.94; p.vy *= 0.94;
+      // Smooth and responsive: a soft falloff, a push away from the cursor plus a little
+      // of its motion so stars sweep along with it, then an eased glide back home.
+      const dx = p.x - glide.x, dy = p.y - glide.y, d = Math.hypot(dx, dy);
+      const k = d < R ? 1 - d / R : 0;
+      const near = k * k * (3 - 2 * k); // smoothstep
+      if (near > 0 && d > 0.01) {
+        p.vx += (dx / d) * near * 0.9 + glide.vx * near * 0.06;
+        p.vy += (dy / d) * near * 0.9 + glide.vy * near * 0.06;
+      }
+      p.vx += (p.hx - p.x) * 0.007; p.vy += (p.hy - p.y) * 0.007;
+      p.vx *= 0.9; p.vy *= 0.9;
       p.x += p.vx; p.y += p.vy;
 
       const twinkle = mode === "dark" ? 0.65 + 0.35 * Math.sin(t * 0.0006 * p.tw + p.ph) : 1;
