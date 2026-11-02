@@ -50,19 +50,25 @@ a { color: inherit; }
 .left > a:hover, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
 /* Solutions dropdown: opens on hover or keyboard focus. */
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
+/* A rounded frosted panel in the same glass as the nav pill; the item you hover fills with white. */
 .dropdown {
-  position: absolute; top: 100%; left: 16px; padding-top: 16px; /* lined up with the SOLUTIONS text; padding bridges the hover gap */
-  display: flex; flex-direction: column; min-width: 240px;
+  position: absolute; top: 100%; left: 0; padding: 16px 6px 6px; /* the top padding bridges the hover gap */
+  display: flex; flex-direction: column; gap: 2px; min-width: 250px;
   visibility: hidden; transition: visibility 0s linear .5s;
 }
-.left .dropdown a { /* .left raises specificity so phones get the bigger size too */
-  position: relative; font-size: 15px; padding: 13px 0; white-space: nowrap;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, .35); /* stays readable over the bright day sky */
+.dropdown::before { /* the panel itself, starting just below the bar */
+  content: ""; position: absolute; inset: 10px 0 0; border-radius: 22px;
+  background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   opacity: 0; transform: translateY(-6px);
-  transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), text-shadow .3s;
+  transition: opacity .45s cubic-bezier(.22, .61, .36, 1), transform .45s cubic-bezier(.22, .61, .36, 1);
 }
-.dropdown a + a { border-top: 1px solid rgba(255, 246, 230, .55); } /* thin lines between items */
-.left .dropdown a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* keep the hover halo */
+.left .dropdown a { /* .left raises specificity so phones get the same size */
+  position: relative; font-size: 14px; padding: 12px 16px; border-radius: 999px; white-space: nowrap;
+  opacity: 0; transform: translateY(-6px);
+  transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), background-color .4s, color .4s;
+}
+.left .dropdown a:hover { background: var(--white); color: #1d1a16; text-shadow: none; }
+.menu:hover .dropdown::before, .menu:focus-within .dropdown::before { opacity: 1; transform: none; }
 .menu:hover .dropdown, .menu:focus-within .dropdown { visibility: visible; transition-delay: 0s; }
 .menu:hover .dropdown a, .menu:focus-within .dropdown a { opacity: 1; transform: none; }
 /* Items ease in one after another. */
@@ -134,7 +140,6 @@ a { color: inherit; }
   .left a { font-size: 11px; }
   .left { padding: 2px; gap: 0; }
   .left > a, .menu > a { font-size: 10px; letter-spacing: .02em; padding: 8px 6.5px; }
-  .dropdown { left: 6.5px; }
   .brand svg { width: 64px; height: 16px; }
   .giant > span { transform: scale(.65); }
   .below { margin-top: 7vh; }
