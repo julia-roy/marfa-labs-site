@@ -46,15 +46,17 @@ a { color: inherit; }
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
 .dropdown {
   position: absolute; top: 100%; left: 0; padding-top: 16px; /* padding bridges the hover gap */
-  display: flex; flex-direction: column; min-width: 180px;
+  display: flex; flex-direction: column; min-width: 240px;
   visibility: hidden; transition: visibility 0s linear .5s;
 }
-.dropdown a {
-  position: relative; font-size: 13px; padding: 12px 0; white-space: nowrap;
+.left .dropdown a { /* .left raises specificity so phones get the bigger size too */
+  position: relative; font-size: 17px; padding: 15px 0; white-space: nowrap;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .35); /* stays readable over the bright day sky */
   opacity: 0; transform: translateY(-6px);
   transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), text-shadow .3s;
 }
-.dropdown a + a { border-top: 1px solid rgba(255, 246, 230, .35); } /* thin lines between items */
+.dropdown a + a { border-top: 1px solid rgba(255, 246, 230, .55); } /* thin lines between items */
+.left .dropdown a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* keep the hover halo */
 .menu:hover .dropdown, .menu:focus-within .dropdown { visibility: visible; transition-delay: 0s; }
 .menu:hover .dropdown a, .menu:focus-within .dropdown a { opacity: 1; transform: none; }
 /* Items ease in one after another. */
