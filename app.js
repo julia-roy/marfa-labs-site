@@ -18,7 +18,8 @@ toggle.addEventListener("click", () => {
 // and give the white back to Research (a click listener also makes iOS treat it as tappable).
 document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
 
-// Research and Solutions: a quick letter scramble on hover that settles left to right (~300ms).
+// Research and Solutions: a calm letter scramble on hover. A short wave of 3 letters passes left to right
+// (~380ms); the letters in it change about 16 times a second, the rest of the word stays readable.
 // Mouse only, and off for people who ask for reduced motion.
 if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const letters = "abcdefghijklmnopqrstuvwxyz";
@@ -33,10 +34,16 @@ if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(pr
     a.addEventListener("pointerenter", () => {
       cancelAnimationFrame(raf);
       const start = performance.now();
+      let tick = -1;
       const step = (now) => {
-        const done = Math.min(1, (now - start) / 300) * word.length; // letters settled so far
-        a.textContent = [...word].map((c, i) => (i < done || c === " " ? c : pick(c))).join("");
-        if (done < word.length) raf = requestAnimationFrame(step);
+        const done = Math.min(1, (now - start) / 380) * (word.length + 3); // where the wave has reached
+        const t = Math.floor((now - start) / 60);
+        if (t !== tick) { // new random letters only every 60ms
+          tick = t;
+          a.textContent = [...word].map((c, i) => (i < done - 3 || i >= done || c === " " ? c : pick(c))).join("");
+        }
+        if (done < word.length + 3) raf = requestAnimationFrame(step);
+        else a.textContent = word;
       };
       raf = requestAnimationFrame(step);
     });
