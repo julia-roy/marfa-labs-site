@@ -18,7 +18,7 @@ toggle.addEventListener("click", () => {
 // and give the white back to Research (a click listener also makes iOS treat it as tappable).
 document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
 
-// Research and Solutions: a calm letter scramble on hover. A short wave of 3 letters passes left to right
+// Research, Solutions, Manifesto and Contact: a calm letter scramble on hover. A short wave of 3 letters passes left to right
 // (~380ms); the letters in it change about 16 times a second, the rest of the word stays readable.
 // Mouse only, and off for people who ask for reduced motion.
 if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -27,7 +27,7 @@ if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(pr
     const r = letters[Math.floor(Math.random() * letters.length)];
     return c === c.toUpperCase() ? r.toUpperCase() : r;
   };
-  document.querySelectorAll(".left > a, .menu > a").forEach((a) => {
+  document.querySelectorAll(".left > a, .menu > a, .contact a").forEach((a) => {
     const word = a.textContent;
     a.setAttribute("aria-label", word);
     let raf = 0;
