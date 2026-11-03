@@ -131,11 +131,22 @@ a { color: inherit; }
 
 .foot { display: flex; justify-content: space-between; padding: 16px 28px; font-size: 11px; color: var(--white-2); letter-spacing: .02em; }
 /* Contact sits centred at the very bottom (bottom-right on phones). */
-.contact { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); text-decoration: none; pointer-events: auto; transition: color .3s; }
-.contact:hover { color: var(--white); }
+.contact { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 20px; pointer-events: auto; }
+.contact a { text-decoration: none; transition: color .3s; }
+.contact a:hover, .contact a[aria-current] { color: var(--white); }
 .credit.night { display: none; }
 [data-theme="dark"] .credit.day { display: none; }
 [data-theme="dark"] .credit.night { display: inline; }
+
+/* Manifesto page: always the night photo, a darker veil, and one narrow column of text that scrolls. */
+.page-manifesto .theme { visibility: hidden; } /* night only here */
+.page-manifesto .shade { background: rgba(14, 12, 18, .55); }
+.manifesto { position: relative; z-index: 2; flex: 1; display: flex; justify-content: center; padding: 7vh 24px 14vh; }
+.manifesto .text { max-width: 600px; }
+.manifesto .eyebrow { margin: 0; text-align: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--white-2); }
+.manifesto h1 { margin: 10px 0 7vh; text-align: center; font: 400 clamp(38px, 4.6vw, 56px)/1 var(--serif); letter-spacing: .01em; }
+.manifesto p { margin: 0 0 1.5em; font-size: 15px; line-height: 1.8; color: var(--white); }
+.page-manifesto .foot { padding-top: 40px; }
 
 @media (max-width: 600px) {
   .nav { padding: 13px 16px; } /* the bar stays 70px tall with the bigger pill */
@@ -169,6 +180,11 @@ a { color: inherit; }
   body:has(.menu:hover, .menu:focus-within) .brand { opacity: 0; }
   body:has(.menu:hover, .menu:focus-within) .hero { opacity: 0; pointer-events: auto; cursor: pointer; } /* a tap anywhere closes the menu */
   body:has(.menu:hover, .menu:focus-within) .hero * { pointer-events: none; }
+  /* Manifesto on phones: the title starts just under the star, and the text fades while the menu is open. */
+  .manifesto { padding: calc(15vh - 30px) 22px 12vh; transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
+  .manifesto p { font-size: 14.5px; line-height: 1.75; }
+  body:has(.menu:hover, .menu:focus-within) .manifesto { opacity: 0; }
+  .page-manifesto .foot { position: relative; padding-bottom: 40px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }

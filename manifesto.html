@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manifesto · Marfa Labs</title>
+<meta name="description" content="Why Marfa Labs is training a foundation model for writing that doesn't sound like a machine wrote it.">
+<meta property="og:title" content="Marfa Labs · Manifesto">
+<meta property="og:description" content="Writing that doesn't sound like a machine wrote it.">
+<meta property="og:image" content="https://marfa-labs.com/img/marfa-night.jpg">
+<link rel="icon" id="favicon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-22 -22 44 44'><defs><clipPath id='c'><rect x='-22' y='-22' width='44' height='44' rx='9.68'/></clipPath></defs><rect x='-22' y='-22' width='44' height='44' rx='9.68' fill='%23000000'/><g clip-path='url(%23c)'><path d='M-50 0 Q-12 -1 0 -1.5 Q12 -1 50 0 Q12 1 0 1.5 Q-12 1 -50 0Z' fill='%23f8f4ec'/><path d='M10.96 -10.96 Q3.29 -4.99 0 -3.4 Q-3.03 -4.73 -10.11 -10.11 Q-4.73 -3.03 -3.4 0 Q-4.92 3.22 -10.75 10.75 Q-3.22 4.92 0 3.4 Q2.97 4.67 9.9 9.9 Q4.67 2.97 3.4 0 Q4.99 -3.29 10.96 -10.96Z' fill='%23f8f4ec'/></g></svg>">
+<script>
+  // The manifesto opens on the Marfa lights at night, so this page is always in night mode.
+  document.documentElement.dataset.theme = "dark";
+  document.documentElement.classList.add("js");
+</script>
+<link rel="preload" as="image" href="img/marfa-night.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=83">
+</head>
+<body class="page-manifesto">
+
+<div class="photo day" aria-hidden="true"></div>
+<div class="photo night" aria-hidden="true"></div>
+<div class="shade" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <nav class="left">
+    <a>Research</a>
+    <div class="menu">
+      <a href="/#email" aria-haspopup="true">Solutions</a>
+      <div class="dropdown">
+        <a href="/#email">Sales and marketing</a>
+        <a href="/#email">Film and TV</a>
+        <a href="/#email">API</a>
+      </div>
+    </div>
+  </nav>
+  <a class="brand" href="/" aria-label="Marfa Labs home">
+    <svg viewBox="-51 -13 102 26" aria-hidden="true"><path d="M-50 0 Q-12 -1 0 -1.5 Q12 -1 50 0 Q12 1 0 1.5 Q-12 1 -50 0Z"/><path d="M10.96 -10.96 Q3.29 -4.99 0 -3.4 Q-3.03 -4.73 -10.11 -10.11 Q-4.73 -3.03 -3.4 0 Q-4.92 3.22 -10.75 10.75 Q-3.22 4.92 0 3.4 Q2.97 4.67 9.9 9.9 Q4.67 2.97 3.4 0 Q4.99 -3.29 10.96 -10.96Z"/></svg>
+  </a>
+  <div class="right">
+    <button class="theme" id="theme" type="button" aria-label="Switch to light mode">
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="manifesto">
+  <article class="text">
+    <p class="eyebrow">Marfa Labs</p>
+    <h1>Manifesto</h1>
+    <p>On clear nights east of Marfa, Texas, mysterious lights appear on the horizon. They float above the desert scrub, split in two, drift and go out. People have watched for them for more than a century, and nobody has managed to summon one. You can’t schedule them, all you can do is drive out, stand by the road and wait. Locals call these orbs the Marfa lights.</p>
+    <p>Good writing comes the same way. The right phrasing arrives from slightly off to the side. But current AI was built for the opposite. It learned to predict the likeliest next word, and is then rewarded for being agreeable and drifts toward the middle of everything ever written. What comes out is fluent and polite, but lacks substance and style.</p>
+    <p>People have started calling it slop. It’s spreading into emails, social media posts, scripts, pitches and novels, and even into AI images and video, which are often generated from descriptions written by the same models.</p>
+    <p>Changing your prompt, explaining what you want, doesn’t fix the issue because the habit is built into how these models learned.</p>
+    <p>Marfa Labs exists to fix this problem at the root. We’re training a foundation model for one job: writing that doesn’t sound like a machine wrote it. It learns your style and keeps it yours.</p>
+  </article>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Marfa Labs</span>
+  <span class="contact"><a href="/manifesto" aria-current="page">Manifesto</a><a href="mailto:info@marfa-labs.com">Contact</a></span>
+  <span class="credit day">Photo: Neon Wang / Unsplash</span>
+  <span class="credit night">Photo: Alex Moliski / Unsplash</span>
+</footer>
+
+<script src="sky.js?v=48"></script>
+<script src="app.js?v=55"></script>
+</body>
+</html>

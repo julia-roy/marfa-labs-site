@@ -38,7 +38,7 @@
   }
 
   function measureText() {
-    textRects = [".giant span", ".kicker", ".sub", ".join"]
+    textRects = [".giant span", ".kicker", ".sub", ".join", ".manifesto .text"]
       .map((sel) => document.querySelector(sel))
       .filter((el) => el && getComputedStyle(el).visibility !== "hidden") // skip text that has faded away
       .map((el) => el.getBoundingClientRect());
@@ -127,6 +127,7 @@
   addEventListener("pointermove", (e) => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
   document.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
   addEventListener("resize", build);
+  addEventListener("scroll", measureText, { passive: true }); // the manifesto scrolls under the fixed sky
   document.fonts?.ready.then(measureText);
   addEventListener("marfa:text", measureText); // app.js: the slogan has faded or new text appeared
   // Rebuild with the other mode's particles when the theme switches.

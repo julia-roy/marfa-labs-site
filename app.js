@@ -54,7 +54,7 @@ if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(pr
 // Without an action it keeps the old placeholder message.
 const form = document.getElementById("join");
 const note = document.getElementById("note");
-form.addEventListener("submit", async (e) => {
+form?.addEventListener("submit", async (e) => { // only the homepage has the form
   e.preventDefault();
   if (!form.getAttribute("action")) { note.textContent = "[ The waitlist opens in a few days ]"; return; }
   const button = form.querySelector("button");
