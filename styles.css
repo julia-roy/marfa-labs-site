@@ -67,11 +67,14 @@ a { color: inherit; }
   transition: opacity .45s cubic-bezier(.22, .61, .36, 1), transform .45s cubic-bezier(.22, .61, .36, 1);
 }
 .left .dropdown a { /* .left raises specificity so phones get the same size */
-  position: relative; font-size: 14px; padding: 12px 16px; border-radius: 999px; white-space: nowrap;
+  position: relative; font-size: 14px; text-transform: none; padding: 12px 16px; border-radius: 999px; white-space: nowrap;
   opacity: 0; transform: translateY(-6px);
   transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), background-color .4s, color .4s;
 }
 .left .dropdown a:hover { background: var(--white); color: #1d1a16; text-shadow: none; }
+/* A faint line sets API (how you access Marfa) apart from the use cases above it. */
+.left .dropdown a:last-child { margin-top: 9px; }
+.left .dropdown a:last-child::before { content: ""; position: absolute; top: -6px; left: 16px; right: 16px; height: 1px; background: rgba(255, 246, 230, .22); }
 .menu:hover .dropdown::before, .menu:focus-within .dropdown::before { opacity: 1; transform: none; }
 .menu:hover .dropdown, .menu:focus-within .dropdown { visibility: visible; transition-delay: 0s; }
 .menu:hover .dropdown a, .menu:focus-within .dropdown a { opacity: 1; transform: none; }
