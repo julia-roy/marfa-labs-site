@@ -1,5 +1,5 @@
 // Soft particles that belong to the photo rather than sitting on top of it.
-//   Night: faint warm-cream specks of starlight that twinkle slowly in the sky.
+//   Night: faint warm-cream specks of starlight that twinkle and drift very slowly across the sky.
 //   Day:   pale-gold dust drifting sideways like wind, in the sky above the grassland.
 // Clearly visible but quiet at rest; they brighten, drift away from the cursor and
 // ease back slowly. They fade out around the text, and the effect is off on touch
@@ -94,6 +94,10 @@
         p.hx += p.wind;
         p.hy += Math.sin(t * 0.0004 + p.ph) * 0.08;
         if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; p.hy = rand(m.top, m.bottom) * H; p.y = p.hy; }
+      } else {
+        // Night: the whole sky turns very slowly, every star at the same pace.
+        p.hx += 0.06;
+        if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; }
       }
 
       // Smooth and responsive: a soft falloff, a push away from the cursor plus a little

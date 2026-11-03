@@ -152,7 +152,7 @@ a { color: inherit; }
   .sub { font-size: 16px; margin-bottom: -.5px; } /* two lines now; the smaller margin keeps the layout height, so nothing above moves */
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line is centred at ~56% of the screen height: over the hills by day, above the mountain at night. */
-  .sub { top: calc(-2vh - 3px + clamp(15px, 1.5vw, 21px) * .6); }
+  .sub { top: calc(4.5vh - 3px + clamp(15px, 1.5vw, 21px) * .6); }
   .join, .note { top: calc(17.5vh - 37.5px + clamp(15px, 1.5vw, 21px) * .6); } /* the field starts just under the mountain line: mountain visible at night, in the grass by day */
   /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
   .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
