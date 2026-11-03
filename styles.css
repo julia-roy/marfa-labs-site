@@ -154,7 +154,7 @@ a { color: inherit; }
 .page-manifesto .shade { background: rgba(14, 12, 18, .55); }
 .manifesto { position: relative; z-index: 2; flex: 1; display: flex; justify-content: center; padding: 7vh 24px 14vh; }
 .manifesto .text { max-width: 600px; }
-.manifesto h1 { margin: 0 0 7vh; text-align: center; font: 400 clamp(38px, 4.6vw, 56px)/1 var(--serif); letter-spacing: .01em; }
+.manifesto h1 { margin: 0 0 7vh; text-align: center; font: 400 clamp(32px, 3.9vw, 48px)/1 var(--serif); letter-spacing: .01em; }
 .manifesto p { margin: 0 0 1.5em; font-size: 15px; line-height: 1.8; color: var(--white); }
 .page-manifesto .foot { padding-top: 40px; }
 
