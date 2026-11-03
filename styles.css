@@ -190,7 +190,9 @@ a { color: inherit; }
   .giant > span { top: calc(15vh - 34px); } /* just under the star */
   .below { margin-top: 7vh; }
   .sub { font-size: 16px; margin-bottom: -.5px; } /* two lines now; the smaller margin keeps the layout height, so nothing above moves */
-  .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
+  .sub .beta { display: block; } /* "Private beta." on its own line */
+  .sub .model { display: block; } /* breaks after "range," */
+  .sub { margin-bottom: -23px; } /* one more line than before; this keeps the email field where it was */
   /* On phones the agent line is centred at ~56% of the screen height: over the hills by day, above the mountain at night. */
   .sub { top: calc(4.5vh - 3px + clamp(15px, 1.5vw, 21px) * .6); }
   .join, .note { top: calc(17.5vh - 37.5px + clamp(15px, 1.5vw, 21px) * .6); } /* the field starts just under the mountain line: mountain visible at night, in the grass by day */
