@@ -14,9 +14,9 @@ toggle.addEventListener("click", () => {
   setLabel();
 });
 
-// Research has no page yet, but tapping it on a phone should still close the Solutions menu
-// and give the white back to Research (a click listener also makes iOS treat it as tappable).
-document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
+// Research has no page yet. Tapping it on a phone focuses it, which closes the Solutions menu, gives the white
+// back to Research and shows its "Coming soon" tag (a click listener also makes iOS treat it as tappable).
+document.querySelector(".left > a").addEventListener("click", (e) => e.currentTarget.focus());
 
 // Research, Solutions, Manifesto and Contact: a calm letter scramble on hover. A short wave of 3 letters passes left to right
 // (~380ms); the letters in it change about 16 times a second, the rest of the word stays readable.

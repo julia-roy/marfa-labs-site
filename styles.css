@@ -51,7 +51,16 @@ a { color: inherit; }
 /* Like a switch, one of the two is always white: Research by default, Solutions while its menu is open. */
 .left > a, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
 .left:has(.menu:hover, .menu:focus-within) > a { background: transparent; color: var(--white); }
-.left > a { cursor: default; } /* Research has no link for now */
+.left > a { cursor: default; position: relative; } /* Research has no link for now */
+/* Research isn't ready yet: a small frosted "Coming soon" tag drops in under it on hover (or tap on phones). */
+.left > a::after {
+  content: "Coming soon"; position: absolute; top: calc(100% + 10px); left: 0; white-space: nowrap; pointer-events: none;
+  font-size: 12px; letter-spacing: .02em; color: var(--white); padding: 8px 14px; border-radius: 999px;
+  background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; transform: translateY(-6px); transition: opacity .45s cubic-bezier(.22, .61, .36, 1), transform .45s cubic-bezier(.22, .61, .36, 1);
+}
+.left > a:hover::after, .left > a:focus::after { opacity: 1; transform: none; }
+.left > a:focus { outline: none; }
 /* Solutions dropdown: opens on hover or keyboard focus. */
 .menu { position: relative; display: flex; pointer-events: auto; } /* flex keeps SOLUTIONS level with RESEARCH */
 /* A rounded frosted panel in the same glass as the nav pill; the item you hover fills with white. */
@@ -67,11 +76,15 @@ a { color: inherit; }
   transition: opacity .45s cubic-bezier(.22, .61, .36, 1), transform .45s cubic-bezier(.22, .61, .36, 1);
 }
 .left .dropdown a { /* .left raises specificity so phones get the same size */
-  position: relative; font-size: 14px; text-transform: none; padding: 12px 16px; border-radius: 999px; white-space: nowrap;
+  position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  font-size: 14px; text-transform: none; padding: 12px 16px; border-radius: 999px; white-space: nowrap; cursor: default;
   opacity: 0; transform: translateY(-6px);
   transition: opacity .5s cubic-bezier(.22, .61, .36, 1), transform .5s cubic-bezier(.22, .61, .36, 1), background-color .4s, color .4s;
 }
 .left .dropdown a:hover { background: var(--white); color: #1d1a16; text-shadow: none; }
+/* None of the solutions are live yet. */
+.dropdown .soon { font-size: 11px; color: var(--white-2); transition: color .4s; }
+.left .dropdown a:hover .soon { color: rgba(29, 26, 22, .55); }
 /* A faint line sets API (how you access Marfa) apart from the use cases above it. */
 .left .dropdown a:last-child { margin-top: 9px; }
 .left .dropdown a:last-child::before { content: ""; position: absolute; top: -6px; left: 16px; right: 16px; height: 1px; background: rgba(255, 246, 230, .22); }

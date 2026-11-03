@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=89">
+<link rel="stylesheet" href="styles.css?v=90">
 </head>
 <body class="page-manifesto">
 
@@ -29,13 +29,13 @@
 
 <header class="nav">
   <nav class="left">
-    <a>Research</a>
+    <a tabindex="0">Research</a> <!-- shows "Coming soon" on hover or tap -->
     <div class="menu">
       <a href="/#email" aria-haspopup="true">Solutions</a>
       <div class="dropdown">
-        <a href="/#email">Sales and marketing</a>
-        <a href="/#email">Film and TV</a>
-        <a href="/#email">API</a>
+        <a>Sales and marketing <span class="soon">Coming soon</span></a>
+        <a>Film and TV <span class="soon">Coming soon</span></a>
+        <a>API <span class="soon">Coming soon</span></a>
       </div>
     </div>
   </nav>
@@ -70,6 +70,6 @@
 </footer>
 
 <script src="sky.js?v=48"></script>
-<script src="app.js?v=56"></script>
+<script src="app.js?v=57"></script>
 </body>
 </html>
