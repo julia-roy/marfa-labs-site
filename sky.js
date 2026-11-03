@@ -72,7 +72,7 @@
         size: rand(1, 3),                 // diameter in px
         a: rand(0.4, 0.75),               // resting opacity
         tw: rand(0.6, 1.4), ph: rand(0, 6.28),
-        wind: rand(0.12, 0.32),           // day only: sideways drift
+        wind: rand(0.12, 0.32),           // sideways drift, day and night
       };
     });
     measureText();
@@ -95,8 +95,8 @@
         p.hy += Math.sin(t * 0.0004 + p.ph) * 0.08;
         if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; p.hy = rand(m.top, m.bottom) * H; p.y = p.hy; }
       } else {
-        // Night: the whole sky turns very slowly, every star at the same pace.
-        p.hx += 0.06;
+        // Night: the stars drift sideways at the same speed as the daytime dust.
+        p.hx += p.wind;
         if (p.hx > W + 10) { p.hx = -10; p.x = p.hx; }
       }
 
