@@ -131,14 +131,14 @@ a { color: inherit; }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: min(22px, 3.3vw); line-height: 22.5px; } /* same line height as before, so nothing moves */
 /* A rounded pill like the nav; the negative margin keeps the text exactly where the old underline field had it. */
 .join {
-  display: flex; align-items: center; width: min(320px, 82vw); padding: 4px; margin: -2.75px 0; border-radius: 999px;
+  display: flex; align-items: center; width: min(360px, 82vw); padding: 4px; margin: -2.75px 0 -6.75px; border-radius: 999px; /* 4px taller; the bottom margin keeps what's below in place */
   background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   transition: border-color .3s;
 }
 .join:focus-within { border-color: var(--white); }
-.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 15px var(--sans); padding: 9px 0 9px 14px; outline: none; }
+.join input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: 400 16px var(--sans); padding: 11px 0 11px 16px; outline: none; }
 .join input::placeholder { color: var(--white-2); }
-.join button { border: 0; background: var(--white); color: #1d1a16; font: 400 15px var(--sans); letter-spacing: .02em; cursor: pointer; align-self: stretch; padding: 0 18px; border-radius: 999px; }
+.join button { border: 0; background: var(--white); color: #1d1a16; font: 400 16px var(--sans); letter-spacing: .02em; cursor: pointer; align-self: stretch; padding: 0 20px; border-radius: 999px; }
 .join button:hover { opacity: .7; }
 .note { font-size: 12px; color: var(--white-2); min-height: 1.5em; margin: 10px 0 0; }
 
