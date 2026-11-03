@@ -138,15 +138,16 @@ a { color: inherit; }
 [data-theme="dark"] .credit.day { display: none; }
 [data-theme="dark"] .credit.night { display: inline; }
 
+/* Narrow laptop windows: the centred links would run into the photo credit, so the credit drops under the
+   copyright on the left and the links move to the right, as on phones. */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .foot { flex-direction: column; gap: 2px; }
+  .contact { left: auto; right: 28px; transform: none; }
+}
+
 /* Manifesto page: always the night photo, a darker veil, and one narrow column of text that scrolls. */
 .page-manifesto .theme { display: none; } /* night only here */
-/* A clear way home: a pill in the theme button's spot, and a link at the end of the text. */
-.home {
-  display: block; font-size: 17px; padding: 8px 17px; border-radius: 999px; text-decoration: none; pointer-events: auto;
-  background: rgba(20, 18, 16, .3); border: 1px solid rgba(255, 246, 230, .22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  transition: background-color .45s cubic-bezier(.22, .61, .36, 1), color .45s cubic-bezier(.22, .61, .36, 1);
-}
-.home:hover { background: var(--white); color: #1d1a16; }
+/* The way home: a quiet link at the end of the text. */
 .manifesto .back { margin: 3.5em 0 0; text-align: center; }
 .manifesto .back a { color: var(--white-2); text-decoration: none; transition: color .3s; }
 .manifesto .back a:hover { color: var(--white); }
@@ -192,7 +193,6 @@ a { color: inherit; }
   /* Manifesto on phones: the title starts just under the star, and the text fades while the menu is open. */
   .manifesto { padding: calc(15vh - 30px) 22px 12vh; transition: opacity .5s cubic-bezier(.22, .61, .36, 1); }
   .manifesto p { font-size: 14.5px; line-height: 1.75; }
-  .home { font-size: 14px; padding: 12.5px 17px; } /* same height as the Research / Solutions pill */
   body:has(.menu:hover, .menu:focus-within) .manifesto { opacity: 0; }
   .page-manifesto .foot { position: relative; padding-bottom: 40px; }
 }
