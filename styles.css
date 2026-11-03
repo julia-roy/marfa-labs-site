@@ -20,7 +20,7 @@ body {
 a { color: inherit; }
 
 .photo { position: fixed; inset: 0; background-size: cover; transition: opacity 1.2s ease; }
-.photo.day { background-image: url("img/marfa-day.jpg?v=2"); background-position: center 55%; }
+.photo.day { background-image: url("img/marfa-day.jpg?v=3"); background-position: center 55%; }
 .photo.night { background-image: url("img/marfa-night.jpg"); background-position: center 78%; opacity: 0; }
 [data-theme="dark"] .photo.day { opacity: 0; }
 [data-theme="dark"] .photo.night { opacity: 1; }
