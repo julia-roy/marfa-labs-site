@@ -47,7 +47,7 @@ a { color: inherit; }
 }
 .left a { font: 400 16px/1 var(--sans); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: opacity .3s, text-shadow .3s; }
 .left a:hover { text-shadow: 0 0 10px rgba(255, 246, 230, .95), 0 0 26px rgba(255, 236, 210, .7); } /* halo */
-.left > a, .menu > a { text-transform: none; padding: 7px 16px; border-radius: 999px; transition: background-color .45s cubic-bezier(.22, .61, .36, 1), color .45s cubic-bezier(.22, .61, .36, 1); }
+.left > a, .menu > a { text-transform: none; font-size: 17px; padding: 8px 17px; border-radius: 999px; transition: background-color .45s cubic-bezier(.22, .61, .36, 1), color .45s cubic-bezier(.22, .61, .36, 1); }
 /* Like a switch, one of the two is always white: Research by default, Solutions while its menu is open. */
 .left > a, .menu:hover > a, .menu:focus-within > a { background: var(--white); color: #1d1a16; text-shadow: none; }
 .left:has(.menu:hover, .menu:focus-within) > a { background: transparent; color: var(--white); }
@@ -107,10 +107,10 @@ a { color: inherit; }
 /* MARFA sits right under the star, as one mark. It is placed against the top of the hero (just below the bar);
    an invisible copy keeps the space it used to take, so nothing else moves. */
 .giant::before { content: "MARFA"; visibility: hidden; display: inline-block; font: 400 clamp(46px, 7.5vw, 120px)/0.8 var(--serif); letter-spacing: -.01em; }
-.giant > span { position: absolute; left: 50%; top: -10px; transform: translateX(-50%) scale(.65); transform-origin: 50% 0; }
+.giant > span { position: absolute; left: 50%; top: 6px; transform: translateX(-50%) scale(.65); transform-origin: 50% 0; }
 /* Agent line + email sit lower, alone in the grass. The extra clamp() term makes up for the slogan line that used
    to sit above them, so they stay exactly where they were. */
-.sub { position: relative; top: calc(12.5vh - 12px + clamp(15px, 1.5vw, 21px) * .6); }
+.sub { position: relative; top: calc(9.5vh - 12px + clamp(15px, 1.5vw, 21px) * .6); }
 .join, .note { position: relative; top: calc(12vh + clamp(15px, 1.5vw, 21px) * .6); }
 .sub { margin: 12px 0 22px; color: var(--white-2); font-size: min(22px, 3.3vw); line-height: 22.5px; } /* same line height as before, so nothing moves */
 /* A rounded pill like the nav; the negative margin keeps the text exactly where the old underline field had it. */
@@ -140,19 +140,19 @@ a { color: inherit; }
   .left a { font-size: 11px; }
   .left { padding: 3px; gap: 2px; position: relative; }
   .menu { position: static; } /* the Solutions panel lines up with the pill's left edge, so it fits narrow phones */
-  .left > a, .menu > a { font-size: 13px; letter-spacing: .02em; padding: 11.5px 16px; } /* about 44px tall: comfortable for a finger */
+  .left > a, .menu > a { font-size: 14px; letter-spacing: .02em; padding: 11.5px 17px; } /* about 44px tall: comfortable for a finger */
   /* On phones the top bar holds just the pill and the theme button; the star (with MARFA under it) sits lower, centred,
      and the theme button stays top-right. The bar keeps its height, so nothing else moves. */
   .nav { min-height: 70px; }
   .brand { position: absolute; top: 15vh; left: 50%; transform: translateX(-50%); transition: opacity .5s; }
   .right { grid-column: 3; } /* stays on the right edge now that the star has left the middle */
   .brand svg { width: 64px; height: 16px; }
-  .giant > span { top: calc(15vh - 44px); } /* just under the star */
+  .giant > span { top: calc(15vh - 34px); } /* just under the star */
   .below { margin-top: 7vh; }
   .sub { font-size: 16px; margin-bottom: -.5px; } /* two lines now; the smaller margin keeps the layout height, so nothing above moves */
   .sub .beta { display: block; } /* "Private beta, 2027." on its own line */
   /* On phones the agent line is centred at ~56% of the screen height: over the hills by day, above the mountain at night. */
-  .sub { top: calc(.5vh - 3px + clamp(15px, 1.5vw, 21px) * .6); }
+  .sub { top: calc(-2vh - 3px + clamp(15px, 1.5vw, 21px) * .6); }
   .join, .note { top: calc(17.5vh - 37.5px + clamp(15px, 1.5vw, 21px) * .6); } /* the field starts just under the mountain line: mountain visible at night, in the grass by day */
   /* A bigger email field for fingers (16px text also stops iPhones zooming in on tap). */
   .join { width: 90vw; margin-bottom: -11.75px; } /* 9px taller; the margin keeps the layout height, so nothing above moves */
