@@ -165,6 +165,9 @@ a { color: inherit; }
 .manifesto .back a { color: var(--white-2); text-decoration: none; transition: color .3s; }
 .manifesto .back a:hover { color: var(--white); }
 .page-manifesto .shade { background: rgba(14, 12, 18, .55); }
+.page-manifesto .photo.night { background-image: url("img/marfa-lights.jpg"); background-position: center 60%; } /* a real photo of the Marfa lights */
+.page-manifesto .credit a { color: inherit; pointer-events: auto; text-decoration: none; }
+.page-manifesto .credit a:hover { color: var(--white); }
 .manifesto { position: relative; z-index: 2; flex: 1; display: flex; justify-content: center; padding: 7vh 24px 14vh; }
 .manifesto .text { max-width: 600px; }
 .manifesto h1 { margin: 0 0 7vh; text-align: center; font: 400 clamp(32px, 3.9vw, 48px)/1 var(--serif); letter-spacing: .01em; }
