@@ -128,7 +128,7 @@ a { color: inherit; }
    to sit above them, so they stay exactly where they were. */
 .sub { position: relative; top: calc(9.5vh - 12px + clamp(15px, 1.5vw, 21px) * .6); }
 .join, .note { position: relative; top: calc(12vh + clamp(15px, 1.5vw, 21px) * .6); }
-.sub { margin: 12px 0 22px; color: var(--white-2); font-size: min(22px, 3.3vw); line-height: 22.5px; } /* same line height as before, so nothing moves */
+.sub { margin: 12px 0 22px; color: var(--white-2); font-size: min(18px, 2.7vw); line-height: 22.5px; } /* same line height as before, so nothing moves */
 /* A rounded pill like the nav; the negative margin keeps the text exactly where the old underline field had it. */
 .join {
   display: flex; align-items: center; width: min(360px, 82vw); padding: 4px; margin: -2.75px 0 -6.75px; border-radius: 999px; /* 4px taller; the bottom margin keeps what's below in place */
