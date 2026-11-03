@@ -18,6 +18,31 @@ toggle.addEventListener("click", () => {
 // and give the white back to Research (a click listener also makes iOS treat it as tappable).
 document.querySelector(".left > a").addEventListener("click", () => document.activeElement?.blur());
 
+// Research and Solutions: a quick letter scramble on hover that settles left to right (~300ms).
+// Mouse only, and off for people who ask for reduced motion.
+if (matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  const pick = (c) => {
+    const r = letters[Math.floor(Math.random() * letters.length)];
+    return c === c.toUpperCase() ? r.toUpperCase() : r;
+  };
+  document.querySelectorAll(".left > a, .menu > a").forEach((a) => {
+    const word = a.textContent;
+    a.setAttribute("aria-label", word);
+    let raf = 0;
+    a.addEventListener("pointerenter", () => {
+      cancelAnimationFrame(raf);
+      const start = performance.now();
+      const step = (now) => {
+        const done = Math.min(1, (now - start) / 300) * word.length; // letters settled so far
+        a.textContent = [...word].map((c, i) => (i < done || c === " " ? c : pick(c))).join("");
+        if (done < word.length) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    });
+  });
+}
+
 // Waitlist: sends the email to Formspree (the form's action is the Formspree endpoint).
 // Without an action it keeps the old placeholder message.
 const form = document.getElementById("join");
